@@ -1,0 +1,43 @@
+
+Models:
+    User:{
+        int key id/Matricule,
+        string Nom,
+        string Prenom,
+        string encrypted Mdp,
+        string[] Roles?,
+    }
+
+    Fournisseur:{
+        int key id/Code,
+        string Nom,
+        string Adresse,
+        string Tel,
+        string Fax,
+        string Email,
+    }
+
+    Contrat[Panne/Maintenance]:{
+        int key id/Num,
+        Type,
+        string Société,
+        string Tel,
+        --Fax,
+        Email,
+        Adresse,--
+        DateTime Date Contrat,
+        DateTime Durée,
+        int Cout,
+    }
+
+    Materiel:{
+        int id/NumSerie,
+        Date??,
+        Etat??,
+        Maintenance,
+        Observation,
+        Type,
+        string Marque,
+        string Modele,
+        Designation??,
+    }
