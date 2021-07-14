@@ -25,6 +25,7 @@ _UpgradeReport_Files/
 API/bin/
 API/obj/
 TestResults/
+.vs/
 ###################
 # Web publish log #
 ###################
