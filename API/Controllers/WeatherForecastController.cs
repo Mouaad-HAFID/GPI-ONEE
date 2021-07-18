@@ -34,18 +34,17 @@ namespace API.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            
+
         }
         [HttpGet("/{id}")]
         public WeatherForecast Get(int id)
         {
-            Console.WriteLine("Id Fetched Through Request:"+id);
+            Console.WriteLine("Id Fetched Through Request:" + id);
             var getTest = new WeatherForecast();
             getTest.TemperatureC = id * 10;
             Console.WriteLine(getTest.ToString());
-
             return getTest;
         }
-        
+
     }
 }
