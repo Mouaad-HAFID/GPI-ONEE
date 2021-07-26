@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
@@ -34,8 +33,8 @@ namespace API.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-
         }
+
         [HttpGet("/{id}")]
         public WeatherForecast Get(int id)
         {
@@ -45,6 +44,5 @@ namespace API.Controllers
             Console.WriteLine(getTest.ToString());
             return getTest;
         }
-
     }
 }
