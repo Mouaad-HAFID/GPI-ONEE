@@ -10,5 +10,7 @@ namespace API.Data
         }
 
         public DbSet<AppUser> Users { get; set; }
+        public DbSet<Agent> Agents { get; set; }
+        public DbSet<Equipement> Equipements { get; set; }
     }
 }
