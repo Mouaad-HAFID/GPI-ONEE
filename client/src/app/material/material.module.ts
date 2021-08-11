@@ -11,6 +11,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 const MaterialComponents = [
   MatInputModule,
@@ -25,6 +29,10 @@ const MaterialComponents = [
   MatSelectModule,
   MatOptionModule,
   MatProgressSpinnerModule,
+  MatSidenavModule,
+  MatTooltipModule,
+  MatListModule,
+  MatGridListModule,
 ];
 
 @NgModule({

@@ -1,0 +1,44 @@
+<mat-toolbar style="position: fixed;z-index: 99;" color="primary+">
+
+  <mat-toolbar-row class="mat-elevation-z6">
+    <button mat-icon-button class="icon" (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <span><a routerLink="home">GPI</a></span>
+    <span class="spacer"></span>
+
+    <button mat-icon-button class="example-icon" (click)="logout()" routerLink="/" matTooltip="Logout"
+      matTooltipPosition="left">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+<mat-drawer-container class="container" style="top: 5%;height: 100%;width: 100%;" hasBackdrop="true">
+
+  <mat-drawer #drawer class="sidenav" mode="over">
+    <mat-list>
+      <mat-list-item>Item 1</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Item 2</mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>Item 3</mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <div class="card-container" style="display: flex; justify-content: space-around; width: 70%;">
+      <a href="">
+        <mat-card class="link-card mat-elevation-z6">Link</mat-card>
+      </a>
+      <a href="">
+        <mat-card class=" link-card mat-elevation-z6" mat-card-title>Link</mat-card>
+      </a>
+      <a href="">
+        <mat-card class="link-card mat-elevation-z6">Link</mat-card>
+      </a>
+    </div>
+  </div>
+
+</mat-drawer-container>

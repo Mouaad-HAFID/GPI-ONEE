@@ -1,5 +1,5 @@
-<mat-card>
-  <mat-card-title>Login</mat-card-title>
+<mat-card class="mat-elevation-z10" style="height: 400px;width: 350px;padding: 0 20px;">
+  <mat-card-title style="margin: 50px 0;">Login</mat-card-title>
   <mat-card-content>
     <form (ngSubmit)="login()">
       <p>
@@ -15,7 +15,8 @@
       </p>
 
       <div class="button">
-        <button type="submit" mat-raised-button color="primary">Login</button>
+        <button style="margin-top: 35px;" type="submit" routerLink="home" mat-raised-button
+          color="accent">Login</button>
       </div>
 
     </form>
