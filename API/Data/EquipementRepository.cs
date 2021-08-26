@@ -20,9 +20,12 @@ namespace API.Data
             _context = context;
         }
 
-        public Task<EquipementDto> AddEquipement(EquipementDto equipement)
+        public async Task<EquipementDto> AddEquipement(EquipementDto equipement)
         {
-            throw new System.NotImplementedException();
+            Equipement NewEquipement = new Equipement();
+            _context.Equipements.Add(_mapper.Map(equipement, NewEquipement));
+            await _context.SaveChangesAsync();
+            return equipement;
         }
 
         public async Task<EquipementDto> GetEquipementById(int id)
@@ -30,19 +33,19 @@ namespace API.Data
             return await _context.Equipements.Where(e => e.Id == id).ProjectTo<EquipementDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
         }
 
-        public Task<IEnumerable<EquipementDto>> GetEquipementsAsync()
+        public async Task<IEnumerable<EquipementDto>> GetEquipementsAsync()
         {
-            throw new System.NotImplementedException();
+            return await _context.Equipements.ProjectTo<EquipementDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
-        public Task<bool> SaveAllAsync()
+        public async Task<bool> SaveAllAsync()
         {
-            throw new System.NotImplementedException();
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public void Update(Equipement equipement)
         {
-            throw new System.NotImplementedException();
+            _context.Entry(equipement).State = EntityState.Modified;
         }
     }
 }

@@ -37,14 +37,8 @@ namespace API.Data
 
         public async Task<AgentDto> AddAgent(AgentDto agent)
         {
-            var NewAgent = new Agent
-            {
-                Matricule = agent.Matricule,
-                Nom = agent.Nom,
-                Prenom = agent.Prenom,
-                DirectionId = agent.DirectionId
-            };
-            _context.Agents.Add(NewAgent);
+            Agent NewAgent = new Agent();
+            _context.Agents.Add(_mapper.Map(agent, NewAgent));
             await _context.SaveChangesAsync();
             return agent;
         }
@@ -59,6 +53,10 @@ namespace API.Data
             _context.Entry(agent).State = EntityState.Modified;
         }
 
-
+        public async void DeleteAgent(int matricule)
+        {
+            _context.Agents.Remove(await _context.Agents.Where(a => a.Matricule == matricule).SingleOrDefaultAsync());
+            await _context.SaveChangesAsync();
+        }
     }
 }
