@@ -12,5 +12,6 @@ namespace API.Interfaces
         Task<IEnumerable<AgentDto>> GetAgentsAsync();
         Task<AgentDto> GetAgentByMatriculeAsync(int matricule);
         Task<AgentDto> AddAgent(AgentDto agent);
+        void DeleteAgent(int matricule);
     }
 }
