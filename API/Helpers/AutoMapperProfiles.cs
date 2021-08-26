@@ -8,15 +8,15 @@ namespace API.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Agent, AgentDto>();
-            CreateMap<Direction, DirectionDto>();
-            CreateMap<Equipement, EquipementDto>();
-            CreateMap<Inventaire, InventaireDto>();
-            CreateMap<Fournisseur, FournisseurDto>();
-            CreateMap<Mouvement, MouvementDto>();
-            CreateMap<Contrat, ContratDto>();
-            CreateMap<Gamme, GammeDto>();
-            CreateMap<TypeEquipement, TypeEquipementDto>();
+            CreateMap<Agent, AgentDto>().ReverseMap();
+            CreateMap<Direction, DirectionDto>().ReverseMap();
+            CreateMap<Equipement, EquipementDto>().ReverseMap();
+            CreateMap<Inventaire, InventaireDto>().ReverseMap();
+            CreateMap<Fournisseur, FournisseurDto>().ReverseMap();
+            CreateMap<Mouvement, MouvementDto>().ReverseMap();
+            CreateMap<Contrat, ContratDto>().ReverseMap();
+            CreateMap<Gamme, GammeDto>().ReverseMap();
+            CreateMap<TypeEquipement, TypeEquipementDto>().ReverseMap();
 
         }
     }

@@ -16,6 +16,14 @@ namespace API.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IAgentRepository, AgentRepository>();
             services.AddScoped<IEquipementRepository, EquipementRepository>();
+            services.AddScoped<IDirectionRepository, DirectionRepository>();
+            services.AddScoped<IInventaireRepository, InventaireRepository>();
+            services.AddScoped<IMouvementRepository, MouvementRepository>();
+            services.AddScoped<IFournisseurRepository, FournisseurRepository>();
+            services.AddScoped<IContratRepository, ContratRepository>();
+            services.AddScoped<IGammeRepository, GammeRepository>();
+            services.AddScoped<ITypeRepository, TypeRepository>();
+
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(optionsAction =>
             {
