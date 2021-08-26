@@ -6,7 +6,6 @@ namespace API.DTOs
     public class AgentDto
     {
         //?Props
-        public int Id { get; set; }
         public int Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
@@ -18,8 +17,6 @@ namespace API.DTOs
         public string UniteStruc { get; set; }
         //?Relations
         public ICollection<EquipementDto> Equipements { get; set; }
-        public DirectionDto Direction { get; set; }
         public int DirectionId { get; set; }
-        public ICollection<MouvementDto> Mouvements { get; set; }
     }
 }

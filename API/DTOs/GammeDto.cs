@@ -7,8 +7,6 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public string Caracteristiques { get; set; }
-
-        public TypeEquipementDto Type { get; set; }
         public int TypeId { get; set; }
         public ICollection<EquipementDto> Equipements { get; set; }
     }

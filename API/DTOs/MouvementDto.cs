@@ -11,7 +11,6 @@ namespace API.DTOs
         public string TypeMouvement { get; set; }
         public DateTime DateMouvement { get; set; } = DateTime.Now;
         //?Relations
-        public AgentDto Demandeur { get; set; }
         public int DemandeurId { get; set; }
         public ICollection<EquipementDto> Equipements { get; set; }
     }
