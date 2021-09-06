@@ -11,6 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { CardComponent } from './components/card/card.component';
+import { AgentsTabComponent } from './components/agents-tab/agents-tab.component';
+import { EquipementsTabComponent } from './components/equipements-tab/equipements-tab.component';
+import { AgentsExpansionComponent } from './components/agents-expansion/agents-expansion.component';
+import { EquipementsExpansionComponent } from './components/equipements-expansion/equipements-expansion.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +23,10 @@ import { CardComponent } from './components/card/card.component';
     HomeComponent,
     ToolbarComponent,
     CardComponent,
+    AgentsTabComponent,
+    EquipementsTabComponent,
+    AgentsExpansionComponent,
+    EquipementsExpansionComponent,
   ],
   imports: [
     BrowserModule,

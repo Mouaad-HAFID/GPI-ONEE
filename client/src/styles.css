@@ -18,3 +18,7 @@ body {
 .link-card:hover {
   background: rgba(0, 0, 0, 0.04);
 }
+
+a {
+  text-decoration: none;
+}

@@ -15,6 +15,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const MaterialComponents = [
   MatInputModule,
@@ -33,6 +35,8 @@ const MaterialComponents = [
   MatTooltipModule,
   MatListModule,
   MatGridListModule,
+  MatPaginatorModule,
+  MatSortModule,
 ];
 
 @NgModule({
