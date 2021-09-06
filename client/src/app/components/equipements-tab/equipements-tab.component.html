@@ -1,0 +1,31 @@
+<div class="container">
+  <mat-form-field appearance="outline" style="width: 40%; left: 100px;">
+    <mat-label>Rechercher...</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
+    style="margin: 20px auto; width: 80%;" matSort>
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th>
+      <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <span>--Infos/Affectation--</span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <mat-paginator class="paginator" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
+  </mat-paginator>
+</div>

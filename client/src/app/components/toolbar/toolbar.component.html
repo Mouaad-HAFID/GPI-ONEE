@@ -15,30 +15,28 @@
   </mat-toolbar-row>
 
 </mat-toolbar>
-<mat-drawer-container class="container" style="top: 5%;height: 100%;width: 100%;" hasBackdrop="true">
+<mat-drawer-container class="container" style="height: 100%;width: 100%;" hasBackdrop="true">
 
-  <mat-drawer #drawer class="sidenav" mode="over">
+  <mat-drawer #drawer class="sidenav" mode="over" style="top:7%;width: 20%;">
     <mat-list>
-      <mat-list-item>Item 1</mat-list-item>
+      <a routerLink="home">
+        <mat-list-item>Home</mat-list-item>
+      </a>
       <mat-divider></mat-divider>
-      <mat-list-item>Item 2</mat-list-item>
+      <a routerLink="agents">
+        <mat-list-item>Agents</mat-list-item>
+      </a>
+      <mat-divider></mat-divider>
+      <a routerLink="equipements">
+        <mat-list-item>Equipements</mat-list-item>
+      </a>
       <mat-divider></mat-divider>
       <mat-list-item>Item 3</mat-list-item>
     </mat-list>
   </mat-drawer>
-
-  <div class="sidenav-content">
-    <div class="card-container" style="display: flex; justify-content: space-around; width: 70%;">
-      <a href="">
-        <mat-card class="link-card mat-elevation-z6">Link</mat-card>
-      </a>
-      <a href="">
-        <mat-card class=" link-card mat-elevation-z6" mat-card-title>Link</mat-card>
-      </a>
-      <a href="">
-        <mat-card class="link-card mat-elevation-z6">Link</mat-card>
-      </a>
-    </div>
+  <div class=" content">
+    <router-outlet></router-outlet>
   </div>
+
 
 </mat-drawer-container>
