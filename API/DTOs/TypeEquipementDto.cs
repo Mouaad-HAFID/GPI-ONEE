@@ -10,6 +10,5 @@ namespace API.DTOs
         //?Relations
         public ICollection<GammeDto> Gammes { get; set; }
         public ICollection<EquipementDto> Equipement { get; set; }
-        public int TypeId { get; set; }
     }
 }

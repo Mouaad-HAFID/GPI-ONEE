@@ -28,6 +28,8 @@ namespace API.Data
             return equipement;
         }
 
+
+
         public async Task<EquipementDto> GetEquipementById(int id)
         {
             return await _context.Equipements.Where(e => e.Id == id).ProjectTo<EquipementDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();

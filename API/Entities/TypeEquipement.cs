@@ -10,6 +10,5 @@ namespace API.Entities
         //?Relations
         public ICollection<Gamme> Gammes { get; set; }
         public ICollection<Equipement> Equipement { get; set; }
-        public int TypeId { get; set; }
     }
 }

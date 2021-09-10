@@ -17,6 +17,7 @@ namespace API.Helpers
             CreateMap<Contrat, ContratDto>().ReverseMap();
             CreateMap<Gamme, GammeDto>().ReverseMap();
             CreateMap<TypeEquipement, TypeEquipementDto>().ReverseMap();
+            CreateMap<AffectationDto, Equipement>().ReverseMap();
 
         }
     }

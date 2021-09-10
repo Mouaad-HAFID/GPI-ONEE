@@ -10,6 +10,7 @@ namespace API.DTOs
 
         //?Relations
         public int AgentId { get; set; }
+        public InventaireDto Inventaire { get; set; }
         public int InventaireId { get; set; }
         public int MouvementId { get; set; }
         public int TypeEquipementId { get; set; }

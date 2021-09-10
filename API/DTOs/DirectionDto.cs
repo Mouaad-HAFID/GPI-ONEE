@@ -7,6 +7,7 @@ namespace API.DTOs
         public int Id { get; set; }
         public string Nom { get; set; }
         public ICollection<AgentDto> Agents { get; set; }
+        public InventaireDto Inventaire { get; set; }
         public int InventaireId { get; set; }
     }
 }

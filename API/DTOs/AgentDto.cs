@@ -6,6 +6,7 @@ namespace API.DTOs
     public class AgentDto
     {
         //?Props
+        public int Id { get; set; }
         public int Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
