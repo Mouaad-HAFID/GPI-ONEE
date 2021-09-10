@@ -59,7 +59,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 .container {
-  justify-content: left;
+  padding-top: 3%;
 }
 .paginator {
   background-color: #fafafa;

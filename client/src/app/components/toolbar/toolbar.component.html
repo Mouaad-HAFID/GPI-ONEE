@@ -1,42 +1,40 @@
-<mat-toolbar style="position: fixed;z-index: 99;" color="primary+">
+<div class="page-container">
+  <mat-toolbar class="header" style="position: sticky;z-index: 99;" color="primary">
+    <mat-toolbar-row class="mat-elevation-z6">
+      <button mat-icon-button class="icon" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <span><a style="color: white;" routerLink="home">GPI</a></span>
+      <span class="spacer"></span>
 
-  <mat-toolbar-row class="mat-elevation-z6">
-    <button mat-icon-button class="icon" (click)="drawer.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span class="spacer"></span>
-    <span><a routerLink="home">GPI</a></span>
-    <span class="spacer"></span>
+      <button mat-icon-button class="example-icon" (click)="logout()" routerLink="/" matTooltip="Logout"
+        matTooltipPosition="left">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
 
-    <button mat-icon-button class="example-icon" (click)="logout()" routerLink="/" matTooltip="Logout"
-      matTooltipPosition="left">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar-row>
-
-</mat-toolbar>
-<mat-drawer-container class="container" style="height: 100%;width: 100%;" hasBackdrop="true">
-
-  <mat-drawer #drawer class="sidenav" mode="over" style="top:7%;width: 20%;">
-    <mat-list>
-      <a routerLink="home">
-        <mat-list-item>Home</mat-list-item>
-      </a>
-      <mat-divider></mat-divider>
-      <a routerLink="agents">
-        <mat-list-item>Agents</mat-list-item>
-      </a>
-      <mat-divider></mat-divider>
-      <a routerLink="equipements">
-        <mat-list-item>Equipements</mat-list-item>
-      </a>
-      <mat-divider></mat-divider>
-      <mat-list-item>Item 3</mat-list-item>
-    </mat-list>
-  </mat-drawer>
-  <div class=" content">
-    <router-outlet></router-outlet>
-  </div>
-
-
-</mat-drawer-container>
+  <mat-drawer-container class="container" hasBackdrop="true">
+    <mat-drawer #drawer class="sidenav" mode="over" style="width: 20%;">
+      <mat-list>
+        <a routerLink="home">
+          <mat-list-item>Home</mat-list-item>
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="agents">
+          <mat-list-item>Agents</mat-list-item>
+        </a>
+        <mat-divider></mat-divider>
+        <a routerLink="equipements">
+          <mat-list-item>Equipements</mat-list-item>
+        </a>
+        <mat-divider></mat-divider>
+        <mat-list-item>Item 3</mat-list-item>
+      </mat-list>
+    </mat-drawer>
+    <div class=" content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-container>
+</div>

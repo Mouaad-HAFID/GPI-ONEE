@@ -2,6 +2,12 @@
   <mat-form-field appearance="outline" style="width: 40%; left: 100px;">
     <mat-label>Rechercher...</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>close</mat-icon>
+    </button>
+    <button *ngIf="!value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-form-field>
 
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8"
@@ -14,7 +20,9 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <app-agents-expansion [Equipements]="element.equipements"></app-agents-expansion>
+          <app-agents-expansion style="width:100%;padding: 20px;display: flex;justify-content: space-between;"
+            [Equipements]="element.equipements">
+          </app-agents-expansion>
         </div>
       </td>
     </ng-container>

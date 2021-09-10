@@ -1,0 +1,63 @@
+ <form [formGroup]="affectationFormGroup" (ngSubmit)="onSubmit()">
+   <mat-vertical-stepper class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;"
+     formArrayName="formArray" orientation="vertical" #stepper>
+     <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+       <ng-template matStepLabel>Type d'affectation</ng-template>
+       <mat-radio-group style="margin:20px;padding: 10px;" formControlName="typeControl">
+         <mat-radio-button style="margin:20px;padding: 10px;" value="Individuel" class="example-margin">
+           Individuel</mat-radio-button>
+         <mat-radio-button style="margin:20px;padding: 10px;" value="Lots" class="example-margin">Lots
+         </mat-radio-button>
+       </mat-radio-group>
+       <div>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
+
+     </mat-step>
+     <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
+       <ng-template matStepLabel>Selection d'Equipements</ng-template>
+       <mat-form-field appearance="fill">
+         <mat-label>Equipements</mat-label>
+         <mat-select multiple formControlName="equipementControl">
+           <mat-optgroup [label]="t.nom" *ngFor="let t of types">
+             <mat-option (onSelectionChange)="onSelect($event)" [value]="e" *ngFor="let e of t.equipement">
+               {{e.nom}}
+             </mat-option>
+           </mat-optgroup>
+         </mat-select>
+       </mat-form-field>
+       <div>
+         <button mat-button matStepperPrevious type="button">Back</button>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
+
+     </mat-step>
+     <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
+       <ng-template matStepLabel>Agent Demandeur</ng-template>
+       <p>Selectionnez un Agent</p>
+       <mat-form-field appearance="fill">
+         <mat-label>Agent</mat-label>
+         <mat-select formControlName="agentControl">
+           <mat-option *ngFor="let a of agents" [value]="a">
+             {{a.nom}} {{a.prenom}}
+           </mat-option>
+         </mat-select>
+       </mat-form-field>
+       <div>
+         <button mat-button matStepperPrevious type="button">Back</button>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
+
+     </mat-step>
+     <mat-step>
+       <ng-template matStepLabel>Done</ng-template>
+       <p>You are now done.</p>
+       <div>
+         <button mat-button matStepperPrevious (click)="onSubmit();reset();stepper.reset();"
+           type="submit">Submit</button>
+         <button mat-button type="button" (click)="reset();stepper.reset();">Reset</button>
+       </div>
+     </mat-step>
+
+   </mat-vertical-stepper>
+ </form>

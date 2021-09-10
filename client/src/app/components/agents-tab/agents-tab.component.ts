@@ -29,11 +29,13 @@ import { AgentService } from 'src/app/_services/agent.service';
     ]),
   ],
 })
-export class AgentsTabComponent implements OnInit {
+export class AgentsTabComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['matricule', 'nom', 'dr'];
   dataSource: MatTableDataSource<Agent[]>;
   expandedElement: Agent | null;
   Equipements: Equipement[];
+  value: string;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -45,7 +47,10 @@ export class AgentsTabComponent implements OnInit {
   ngOnInit() {
     this.onGetAllAgents();
   }
-
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   applyFilter(event: Event) {
     this.dataSource = new MatTableDataSource<Agent[]>(this.agents);
     const filterValue = (event.target as HTMLInputElement).value;
@@ -60,6 +65,8 @@ export class AgentsTabComponent implements OnInit {
     this.agentservice.getAllAgents().subscribe((res) => {
       this.agents = res;
       this.dataSource = new MatTableDataSource<Agent[]>(this.agents);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 }

@@ -1,0 +1,63 @@
+<mat-vertical-stepper class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;" orientation="vertical"
+  #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Type d'affectation</ng-template>
+      <mat-radio-group style="margin:20px;padding: 10px;" formControlName="firstCtrl">
+        <mat-radio-button formControlName="firstCtrl" style="margin:20px;padding: 10px;" class="example-margin">
+          Individuel</mat-radio-button>
+        <mat-radio-button formControlName="firstCtrl" style="margin:20px;padding: 10px;" class="example-margin">Lots
+        </mat-radio-button>
+      </mat-radio-group>
+      <div>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Selection d'Equipements</ng-template>
+      <mat-form-field appearance="fill">
+        <mat-label>Equipements</mat-label>
+        <mat-select multiple>
+          <mat-optgroup [label]="t.nom" *ngFor="let t of types">
+            <mat-option formControlName="secondCtrl" [value]="e.value" *ngFor="let e of t.equipement">
+              {{e.nom}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Direction</ng-template>
+      <p>Selectionnez un Agent</p>
+      <mat-form-field appearance="fill">
+        <mat-label>Direction</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let d of directions" [value]="d">
+            {{d.nom}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious type="button">Back</button>
+        <button mat-button matStepperNext type="button">Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious type="button">Back</button>
+      <button mat-button type="button" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

@@ -27,11 +27,11 @@ import { EquipementService } from 'src/app/_services/equipement.service';
     ]),
   ],
 })
-export class EquipementsTabComponent implements OnInit {
+export class EquipementsTabComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['id', 'nom', 'type'];
   dataSource: MatTableDataSource<Equipement[]>;
   expandedElement: Equipement | null;
-
+  value: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -51,11 +51,17 @@ export class EquipementsTabComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   onGetAllEquipements(): void {
     this.equipementservice.getAllEquipements().subscribe((res) => {
       this.equipements = res;
       this.dataSource = new MatTableDataSource<Equipement[]>(this.equipements);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
 }
