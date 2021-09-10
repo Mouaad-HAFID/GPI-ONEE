@@ -15,6 +15,10 @@ import { AgentsTabComponent } from './components/agents-tab/agents-tab.component
 import { EquipementsTabComponent } from './components/equipements-tab/equipements-tab.component';
 import { AgentsExpansionComponent } from './components/agents-expansion/agents-expansion.component';
 import { EquipementsExpansionComponent } from './components/equipements-expansion/equipements-expansion.component';
+import { AffectationComponent } from './components/affectation/affectation.component';
+import { AffectationDirComponent } from './components/affectation-dir/affectation-dir.component';
+import { CreateAccountComponent } from './components/create-account/create-account.component';
+import { AffectationAgentComponent } from './components/affectation-agent/affectation-agent.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,10 @@ import { EquipementsExpansionComponent } from './components/equipements-expansio
     EquipementsTabComponent,
     AgentsExpansionComponent,
     EquipementsExpansionComponent,
+    AffectationComponent,
+    AffectationDirComponent,
+    CreateAccountComponent,
+    AffectationAgentComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatRippleModule } from '@angular/material/core';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const MaterialComponents = [
   MatInputModule,
@@ -37,6 +42,11 @@ const MaterialComponents = [
   MatGridListModule,
   MatPaginatorModule,
   MatSortModule,
+  MatRippleModule,
+  MatStepperModule,
+  MatRadioModule,
+  MatTabsModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({
