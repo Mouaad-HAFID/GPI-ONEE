@@ -14,4 +14,13 @@ export class EquipementService {
   getAllEquipements(): Observable<Equipement[]> {
     return this.http.get<Equipement[]>(`${this.host}/equipements`);
   }
+  getEquipementById(id: number): Observable<Equipement> {
+    return this.http.get<Equipement>(`${this.host}/equipements/${id}`);
+  }
+  createEquipement(equipement: Equipement): Observable<Equipement> {
+    return this.http.post<Equipement>(`${this.host}/equipements`, equipement);
+  }
+  affectEquipements(id: number, update: Equipement): Observable<Equipement> {
+    return this.http.put<Equipement>(`${this.host}/equipements/${id}`, update);
+  }
 }

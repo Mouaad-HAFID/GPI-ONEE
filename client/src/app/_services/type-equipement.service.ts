@@ -11,6 +11,6 @@ export class TypeEquipementService {
   host = environment.baseUrl;
   constructor(private http: HttpClient) {}
   getAllTypes(): Observable<TypeEquipement[]> {
-    return this.http.get<TypeEquipement[]>(`${this.host}/equipements`);
+    return this.http.get<TypeEquipement[]>(`${this.host}/types`);
   }
 }
