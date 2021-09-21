@@ -19,6 +19,21 @@ import { AffectationComponent } from './components/affectation/affectation.compo
 import { AffectationDirComponent } from './components/affectation-dir/affectation-dir.component';
 import { CreateAccountComponent } from './components/create-account/create-account.component';
 import { AffectationAgentComponent } from './components/affectation-agent/affectation-agent.component';
+import { TypesComponent } from './components/types/types.component';
+import { AddGammeComponent } from './components/addgamme/addgamme.component';
+import { SaisieComponent } from './components/saisie/saisie.component';
+import { MouvementsComponent } from './components/mouvements/mouvements.component';
+import { MouvementsExpansionComponent } from './components/mouvements-expansion/mouvements-expansion.component';
+import { SearchPipe } from './_pipes/search.pipe';
+import { SearchAgentMatPipe } from './_pipes/search-agent-mat.pipe';
+import { AddEquipementComponent } from './components/add-equipement/add-equipement.component';
+import { GestionComponent } from './components/gestion/gestion.component';
+import { ImportAgentsComponent } from './components/import-agents/import-agents.component';
+import { ImportEquipementsComponent } from './components/import-equipements/import-equipements.component';
+import { RestitutionComponent } from './components/restitution/restitution.component';
+import { PretComponent } from './components/pret/pret.component';
+import { EquipementFilterPipe } from './_pipes/equipement-filter.pipe';
+import { AddTypeComponent } from './components/add-type/add-type.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +50,21 @@ import { AffectationAgentComponent } from './components/affectation-agent/affect
     AffectationDirComponent,
     CreateAccountComponent,
     AffectationAgentComponent,
+    TypesComponent,
+    AddGammeComponent,
+    SaisieComponent,
+    MouvementsComponent,
+    MouvementsExpansionComponent,
+    SearchPipe,
+    SearchAgentMatPipe,
+    AddEquipementComponent,
+    GestionComponent,
+    ImportAgentsComponent,
+    ImportEquipementsComponent,
+    RestitutionComponent,
+    PretComponent,
+    EquipementFilterPipe,
+    AddTypeComponent,
   ],
   imports: [
     BrowserModule,
