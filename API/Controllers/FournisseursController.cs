@@ -28,6 +28,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<FournisseurDto>> AddFournisseur(FournisseurDto fournisseur)
         {
+            if (await _fournisseurRepository.FournisseurExists(fournisseur.CodeFournisseur)) return BadRequest("Entrée existante");
             return Ok(await _fournisseurRepository.AddFournisseur(fournisseur));
         }
     }

@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<GammeDto>> GetAllGammesAsync();
         Task<GammeDto> GetGammeById(int id);
         Task<GammeDto> AddGamme(GammeDto gamme);
+        Task<bool> GammeExists(string code);
     }
 }

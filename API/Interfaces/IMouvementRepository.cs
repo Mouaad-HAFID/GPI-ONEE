@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<MouvementDto>> GetMouvementsAsync();
         Task<MouvementDto> GetMouvementByIdAsync(int id);
         Task<MouvementDto> AddMouvement(MouvementDto mouvement);
+        Task<bool> MvtExists(int code);
     }
 }

@@ -12,5 +12,6 @@ namespace API.Interfaces
         Task<IEnumerable<EquipementDto>> GetEquipementsAsync();
         Task<EquipementDto> GetEquipementById(int id);
         Task<EquipementDto> AddEquipement(EquipementDto equipement);
+        Task<bool> EquipementExists(int serie);
     }
 }

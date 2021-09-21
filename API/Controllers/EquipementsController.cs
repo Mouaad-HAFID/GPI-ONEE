@@ -36,6 +36,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<EquipementDto>> AddEquipement(EquipementDto equipement)
         {
+            if (await _equipementRepository.EquipementExists(equipement.Serie)) return BadRequest("Entrée existante");
             return await _equipementRepository.AddEquipement(equipement);
         }
 

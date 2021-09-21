@@ -29,6 +29,11 @@ namespace API.Data
             return gamme;
         }
 
+        public async Task<bool> GammeExists(string code)
+        {
+            return await _context.Gammes.AnyAsync(Gamme => Gamme.Code == code.ToLower());
+        }
+
         public async Task<IEnumerable<GammeDto>> GetAllGammesAsync()
         {
             return await _context.Gammes.ProjectTo<GammeDto>(_mapper.ConfigurationProvider).ToListAsync(); ;

@@ -32,9 +32,6 @@ namespace API.Data.Migrations
                     b.Property<string>("Dir")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DirectionId")
-                        .HasColumnType("int");
-
                     b.Property<string>("DomainePerso")
                         .HasColumnType("nvarchar(max)");
 
@@ -57,8 +54,6 @@ namespace API.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DirectionId");
 
                     b.ToTable("Agents");
                 });
@@ -87,6 +82,35 @@ namespace API.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("API.Entities.Contrat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date1")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date2")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date3")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FournisseurId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroContrat")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FournisseurId");
+
+                    b.ToTable("Contrats");
+                });
+
             modelBuilder.Entity("API.Entities.Direction", b =>
                 {
                     b.Property<int>("Id")
@@ -94,11 +118,11 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("CodeDirection")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("MouvementId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Nom")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -114,8 +138,14 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AgentId")
+                    b.Property<int?>("AgentId")
                         .HasColumnType("int");
+
+                    b.Property<int>("CodeContrat")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodeONE")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FournisseurId")
                         .HasColumnType("int");
@@ -123,14 +153,11 @@ namespace API.Data.Migrations
                     b.Property<int>("GammeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InventaireId")
+                    b.Property<int?>("InventaireId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MouvementId")
+                    b.Property<int>("Serie")
                         .HasColumnType("int");
-
-                    b.Property<string>("Nom")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeEquipementId")
                         .HasColumnType("int");
@@ -145,8 +172,6 @@ namespace API.Data.Migrations
 
                     b.HasIndex("InventaireId");
 
-                    b.HasIndex("MouvementId");
-
                     b.HasIndex("TypeEquipementId");
 
                     b.ToTable("Equipements");
@@ -158,6 +183,9 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CodeFournisseur")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -172,6 +200,9 @@ namespace API.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Caracteristiques")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TypeId")
@@ -209,10 +240,19 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime?>("DateFinMouvement")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateMouvement")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DemandeurId")
+                    b.Property<int?>("DemandeurId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ListeEquipements")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroMvt")
                         .HasColumnType("int");
 
                     b.Property<string>("TypeMouvement")
@@ -235,23 +275,35 @@ namespace API.Data.Migrations
                     b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("TypeEquipement");
                 });
 
-            modelBuilder.Entity("API.Entities.Agent", b =>
+            modelBuilder.Entity("EquipementMouvement", b =>
                 {
-                    b.HasOne("API.Entities.Direction", "Direction")
-                        .WithMany("Agents")
-                        .HasForeignKey("DirectionId")
+                    b.Property<int>("EquipementsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MouvementsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EquipementsId", "MouvementsId");
+
+                    b.HasIndex("MouvementsId");
+
+                    b.ToTable("EquipementMouvement");
+                });
+
+            modelBuilder.Entity("API.Entities.Contrat", b =>
+                {
+                    b.HasOne("API.Entities.Fournisseur", "Fournisseur")
+                        .WithMany("Contrats")
+                        .HasForeignKey("FournisseurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Direction");
+                    b.Navigation("Fournisseur");
                 });
 
             modelBuilder.Entity("API.Entities.Direction", b =>
@@ -267,9 +319,7 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.Agent", "Agent")
                         .WithMany("Equipements")
-                        .HasForeignKey("AgentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AgentId");
 
                     b.HasOne("API.Entities.Fournisseur", "Fournisseur")
                         .WithMany("Equipements")
@@ -285,15 +335,7 @@ namespace API.Data.Migrations
 
                     b.HasOne("API.Entities.Inventaire", "Inventaire")
                         .WithMany("Equipements")
-                        .HasForeignKey("InventaireId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Mouvement", "Mouvement")
-                        .WithMany("Equipements")
-                        .HasForeignKey("MouvementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("InventaireId");
 
                     b.HasOne("API.Entities.TypeEquipement", "TypeEquipement")
                         .WithMany("Equipement")
@@ -308,8 +350,6 @@ namespace API.Data.Migrations
                     b.Navigation("Gamme");
 
                     b.Navigation("Inventaire");
-
-                    b.Navigation("Mouvement");
 
                     b.Navigation("TypeEquipement");
                 });
@@ -340,11 +380,24 @@ namespace API.Data.Migrations
                 {
                     b.HasOne("API.Entities.Agent", "Demandeur")
                         .WithMany("Mouvements")
-                        .HasForeignKey("DemandeurId")
+                        .HasForeignKey("DemandeurId");
+
+                    b.Navigation("Demandeur");
+                });
+
+            modelBuilder.Entity("EquipementMouvement", b =>
+                {
+                    b.HasOne("API.Entities.Equipement", null)
+                        .WithMany()
+                        .HasForeignKey("EquipementsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Demandeur");
+                    b.HasOne("API.Entities.Mouvement", null)
+                        .WithMany()
+                        .HasForeignKey("MouvementsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("API.Entities.Agent", b =>
@@ -356,13 +409,13 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("API.Entities.Direction", b =>
                 {
-                    b.Navigation("Agents");
-
                     b.Navigation("Inventaire");
                 });
 
             modelBuilder.Entity("API.Entities.Fournisseur", b =>
                 {
+                    b.Navigation("Contrats");
+
                     b.Navigation("Equipements");
                 });
 
@@ -372,11 +425,6 @@ namespace API.Data.Migrations
                 });
 
             modelBuilder.Entity("API.Entities.Inventaire", b =>
-                {
-                    b.Navigation("Equipements");
-                });
-
-            modelBuilder.Entity("API.Entities.Mouvement", b =>
                 {
                     b.Navigation("Equipements");
                 });

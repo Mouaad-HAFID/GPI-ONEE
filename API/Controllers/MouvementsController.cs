@@ -29,6 +29,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<MouvementDto>> AddMouvement(MouvementDto mouvement)
         {
+            if (await _mouvementRepository.MvtExists(mouvement.NumeroMvt)) return BadRequest("Entrée existante");
             return await _mouvementRepository.AddMouvement(mouvement);
         }
     }

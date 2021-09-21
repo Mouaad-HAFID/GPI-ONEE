@@ -49,5 +49,10 @@ namespace API.Data
         {
             _context.Entry(equipement).State = EntityState.Modified;
         }
+
+        public async Task<bool> EquipementExists(int serie)
+        {
+            return await _context.Equipements.AnyAsync(Equipement => Equipement.Serie == serie);
+        }
     }
 }

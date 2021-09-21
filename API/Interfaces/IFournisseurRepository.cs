@@ -11,6 +11,7 @@ namespace API.Interfaces
         Task<IEnumerable<FournisseurDto>> GetAllFournisseursAsync();
         Task<FournisseurDto> GetFournisseurById(int id);
         Task<FournisseurDto> AddFournisseur(FournisseurDto fournisseur);
+        Task<bool> FournisseurExists(string code);
 
     }
 }

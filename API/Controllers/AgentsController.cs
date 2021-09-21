@@ -36,7 +36,7 @@ namespace API.Controllers
         public async Task<ActionResult<AgentDto>> GetAgentByMatricule(int matricule)
         {
 
-            return await _agentRepository.GetAgentByMatriculeAsync(matricule);
+            return Ok(await _agentRepository.GetAgentByMatriculeAsync(matricule));
         }
         [HttpPost]
         public async Task<ActionResult<AgentDto>> AddAgent(AgentDto agent)
@@ -57,7 +57,7 @@ namespace API.Controllers
 
         private async Task<bool> AgentExists(int Matricule)
         {
-            return await _context.Agents.AnyAsync(User => User.Matricule == Matricule);
+            return await _context.Agents.AnyAsync(Agent => Agent.Matricule == Matricule);
         }
     }
 }

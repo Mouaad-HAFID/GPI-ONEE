@@ -24,8 +24,10 @@ namespace API.Data
         public async Task<MouvementDto> AddMouvement(MouvementDto mouvement)
         {
             Mouvement NewMouvement = new Mouvement();
-            _context.Mouvement.Add(_mapper.Map(mouvement, NewMouvement));
+            var m = _mapper.Map(mouvement, NewMouvement);
+            _context.Mouvement.Add(m);
             await _context.SaveChangesAsync();
+            mouvement.Id = m.Id;
             return mouvement;
         }
 
@@ -37,6 +39,11 @@ namespace API.Data
         public async Task<IEnumerable<MouvementDto>> GetMouvementsAsync()
         {
             return await _context.Mouvement.ProjectTo<MouvementDto>(_mapper.ConfigurationProvider).ToListAsync();
+        }
+
+        public async Task<bool> MvtExists(int code)
+        {
+            return await _context.Mouvement.AnyAsync(Mvt => Mvt.NumeroMvt == code);
         }
 
         public async Task<bool> SaveAllAsync()

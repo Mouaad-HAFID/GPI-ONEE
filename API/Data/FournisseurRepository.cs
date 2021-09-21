@@ -29,6 +29,11 @@ namespace API.Data
             return fournisseur;
         }
 
+        public async Task<bool> FournisseurExists(string code)
+        {
+            return await _context.Fournisseur.AnyAsync(Fournisseur => Fournisseur.CodeFournisseur == code);
+        }
+
         public async Task<IEnumerable<FournisseurDto>> GetAllFournisseursAsync()
         {
             return await _context.Fournisseur.ProjectTo<FournisseurDto>(_mapper.ConfigurationProvider).ToListAsync();

@@ -23,8 +23,10 @@ namespace API.Data
         public async Task<TypeEquipementDto> AddType(TypeEquipementDto typeEquipement)
         {
             TypeEquipement NewType = new TypeEquipement();
-            _context.TypeEquipement.Add(_mapper.Map(typeEquipement, NewType));
+            var t = _mapper.Map(typeEquipement, NewType);
+            _context.TypeEquipement.Add(t);
             await _context.SaveChangesAsync();
+            typeEquipement.Id = t.Id;
             return typeEquipement;
         }
 
