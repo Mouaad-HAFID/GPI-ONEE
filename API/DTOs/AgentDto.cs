@@ -18,6 +18,6 @@ namespace API.DTOs
         public string UniteStruc { get; set; }
         //?Relations
         public ICollection<EquipementDto> Equipements { get; set; }
-        public int DirectionId { get; set; }
+        public ICollection<MouvementDto> Mouvements { get; set; }
     }
 }

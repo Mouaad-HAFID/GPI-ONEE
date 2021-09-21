@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Entities
@@ -7,20 +8,23 @@ namespace API.Entities
     {
         //?Props
         public int Id { get; set; }
-        public string Nom { get; set; }
+        public int Serie { get; set; }
+        public string CodeONE { get; set; }
+        public int CodeContrat { get; set; }
 
         //?Relations
-        public Agent Agent { get; set; }
-        public int AgentId { get; set; }
-        public Inventaire Inventaire { get; set; }
-        public int InventaireId { get; set; }
-        public Mouvement Mouvement { get; set; }
-        public int MouvementId { get; set; }
+
+        public int? AgentId { get; set; } = null;
+        public virtual Agent Agent { get; set; }
+        public int? InventaireId { get; set; } = null;
+        public virtual Inventaire Inventaire { get; set; }
+        public ICollection<Mouvement> Mouvements { get; set; }
         public TypeEquipement TypeEquipement { get; set; }
         public int TypeEquipementId { get; set; }
         public Gamme Gamme { get; set; }
         public int GammeId { get; set; }
         public Fournisseur Fournisseur { get; set; }
         public int FournisseurId { get; set; }
+
     }
 }

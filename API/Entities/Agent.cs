@@ -19,8 +19,6 @@ namespace API.Entities
         public string UniteStruc { get; set; }
         //?Relations
         public ICollection<Equipement> Equipements { get; set; }
-        public Direction Direction { get; set; }
-        public int DirectionId { get; set; }
         public ICollection<Mouvement> Mouvements { get; set; }
     }
 }

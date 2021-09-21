@@ -8,6 +8,7 @@ namespace API.Entities
     {
         //?Props
         public int Id { get; set; }
+        public string Code { get; set; }
         public string Caracteristiques { get; set; }
         //?Relations
         public TypeEquipement Type { get; set; }

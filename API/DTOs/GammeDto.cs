@@ -6,6 +6,7 @@ namespace API.DTOs
     public class GammeDto
     {
         public int Id { get; set; }
+        public string Code { get; set; }
         public string Caracteristiques { get; set; }
         public TypeEquipementDto Type { get; set; }
         public int TypeId { get; set; }
