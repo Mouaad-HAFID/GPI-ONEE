@@ -14,4 +14,10 @@ export class AgentService {
   getAllAgents(): Observable<Agent[]> {
     return this.http.get<Agent[]>(`${this.host}/agents`);
   }
+  getAgentId(id: number): Observable<Agent> {
+    return this.http.get<Agent>(`${this.host}/agents/${id}`);
+  }
+  addAgent(data: Agent): Observable<Agent> {
+    return this.http.post<Agent>(`${this.host}/agents`, data);
+  }
 }

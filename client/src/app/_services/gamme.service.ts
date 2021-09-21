@@ -13,4 +13,10 @@ export class GammeService {
   getAllGammes(): Observable<Gamme[]> {
     return this.http.get<Gamme[]>(`${this.host}/gammes`);
   }
+  getGammeById(id: number): Observable<Gamme> {
+    return this.http.get<Gamme>(`${this.host}/gammes/${id}`);
+  }
+  addGamme(data: any): Observable<Gamme> {
+    return this.http.post<Gamme>(`${this.host}/gammes`, data);
+  }
 }

@@ -13,4 +13,7 @@ export class InventaireService {
   getAllInventaires(): Observable<Inventaire[]> {
     return this.http.get<Inventaire[]>(`${this.host}/inventaires`);
   }
+  getInventaireById(id: number): Observable<Inventaire> {
+    return this.http.get<Inventaire>(`${this.host}/inventaires/${id}`);
+  }
 }

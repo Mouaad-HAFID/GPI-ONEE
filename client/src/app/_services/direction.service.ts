@@ -13,4 +13,7 @@ export class DirectionService {
   getAllDirections(): Observable<Direction[]> {
     return this.http.get<Direction[]>(`${this.host}/directions`);
   }
+  getDirectionId(id: number): Observable<Direction> {
+    return this.http.get<Direction>(`${this.host}/directions/${id}`);
+  }
 }

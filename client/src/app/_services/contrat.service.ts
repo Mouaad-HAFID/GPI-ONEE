@@ -11,6 +11,9 @@ export class ContratService {
   host = environment.baseUrl;
   constructor(private http: HttpClient) {}
   getAllContrats(): Observable<Contrat[]> {
-    return this.http.get<Contrat[]>(`${this.host}/directions`);
+    return this.http.get<Contrat[]>(`${this.host}/contrats`);
+  }
+  addContrat(data: any): Observable<Contrat> {
+    return this.http.post<Contrat>(`${this.host}/contrats`, data);
   }
 }

@@ -13,4 +13,10 @@ export class TypeEquipementService {
   getAllTypes(): Observable<TypeEquipement[]> {
     return this.http.get<TypeEquipement[]>(`${this.host}/types`);
   }
+  getTypeById(id: number): Observable<TypeEquipement> {
+    return this.http.get<TypeEquipement>(`${this.host}/types/${id}`);
+  }
+  addType(data: any): Observable<TypeEquipement> {
+    return this.http.post<TypeEquipement>(`${this.host}/types`, data);
+  }
 }
