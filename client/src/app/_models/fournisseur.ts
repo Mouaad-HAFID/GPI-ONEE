@@ -1,7 +1,9 @@
+import { Contrat } from './contrat';
 import { Equipement } from './equipement';
 
 export interface Fournisseur {
   id: number;
-  nom: string;
+  CodeFournisseur: string;
   equipements: Equipement[];
+  contrats: Contrat[];
 }

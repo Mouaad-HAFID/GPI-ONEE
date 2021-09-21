@@ -1,8 +1,8 @@
-import { Agent } from './agent';
+import { Inventaire } from './inventaire';
 
 export interface Direction {
-  id: number;
-  nom: string;
-  agents: Agent[];
-  inventaireId: number;
+  id?: number;
+  CodeDirection?: string;
+  inventaire?: Inventaire;
+  inventaireId?: number;
 }

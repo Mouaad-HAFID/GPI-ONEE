@@ -2,10 +2,13 @@ import { Agent } from './agent';
 import { Equipement } from './equipement';
 
 export interface Mouvement {
-  id: number;
-  typeMouvement: string;
-  dateMouvement: Date;
-  demandeurId: number;
-  agentDemandeur: Agent;
-  equipements: Equipement[];
+  id?: number;
+  numeroMvt?: number;
+  typeMouvement?: string;
+  dateMouvement?: Date;
+  dateFinMouvement?: Date;
+  demandeurId?: number;
+  demandeur?: Agent;
+  listeEquipements?: string;
+  equipements?: Equipement[];
 }
