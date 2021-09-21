@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -22,6 +22,11 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTreeModule } from '@angular/material/tree';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 const MaterialComponents = [
   MatInputModule,
@@ -47,6 +52,12 @@ const MaterialComponents = [
   MatRadioModule,
   MatTabsModule,
   MatSnackBarModule,
+  MatTreeModule,
+  CdkAccordionModule,
+  MatAutocompleteModule,
+  NgxMatSelectSearchModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({
