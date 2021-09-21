@@ -1,0 +1,36 @@
+<div class="mat-elevation-z10" style="width: 40%;margin: 20px auto;padding:50px;">
+  <mat-card style="margin-bottom: 30px;"></mat-card>
+  <form style="display: grid;" (ngSubmit)="onSubmit()" [formGroup]="addEquipementFormGroup">
+    <mat-form-field appearance="fill">
+      <mat-label>
+        N° de Serie</mat-label>
+      <input type="text" matInput formControlName="codeOneCtrl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fournisseur</mat-label>
+      <mat-select formControlName="fournisseurCtrl">
+        <mat-option *ngFor=" let f of fournisseurs" [value]="f">{{f.codeFournisseur}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type d'Equipement</mat-label>
+      <mat-select formControlName="typeCtrl">
+        <mat-option (onSelectionChange)="onSelect($event)" *ngFor=" let t of types" [value]="t">{{t.nom|uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Gammes</mat-label>
+      <mat-select formControlName="gammeCtrl">
+        <mat-option *ngFor=" let g of type.gammes" [value]="g">{{g.code}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Contrat</mat-label>
+      <input type="text" matInput formControlName="codeContratCtrl">
+    </mat-form-field>
+    <button style="width:20%; margin-top: 30px;" mat-raised-button color="primary" type="submit">Submit</button>
+
+  </form>
+</div>

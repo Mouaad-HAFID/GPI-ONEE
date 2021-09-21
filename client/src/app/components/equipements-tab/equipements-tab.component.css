@@ -9,10 +9,9 @@ table {
 
 td,
 th {
-  width: 25%;
-}
-table {
-  width: 100%;
+  width: fit-content;
+  min-width: 5%;
+  margin: 0 50px;
 }
 
 tr.example-detail-row {

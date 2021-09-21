@@ -1,30 +1,6 @@
  <form [formGroup]="affectationFormGroup" (ngSubmit)="onSubmit()">
    <mat-vertical-stepper class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;"
      formArrayName="formArray" orientation="vertical" #stepper>
-
-     <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
-       <ng-template matStepLabel>Selection d'Equipements</ng-template>
-       <mat-form-field appearance="fill">
-         <mat-label>Equipements</mat-label>
-         <mat-select multiple formControlName="equipementControl">
-           <mat-option>
-             <ngx-mat-select-search (keyup)="applyFilter($event)" placeholderLabel="Rechercher..."
-               noEntriesFoundLabel="404"></ngx-mat-select-search>
-           </mat-option>
-           <mat-optgroup [label]="t.nom" *ngFor="let t of types">
-             <mat-option (onSelectionChange)="onSelect($event)" [value]="e"
-               *ngFor="let e of t.equipement |equipementFilter| search : searchTxt">
-               {{e.codeONE}}
-             </mat-option>
-           </mat-optgroup>
-         </mat-select>
-       </mat-form-field>
-       <div>
-         <button mat-button matStepperPrevious type="button">Back</button>
-         <button mat-button matStepperNext type="button">Next</button>
-       </div>
-
-     </mat-step>
      <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
        <ng-template matStepLabel>Agent Demandeur</ng-template>
        <p>Selectionnez un Agent</p>
@@ -33,9 +9,11 @@
          <mat-select formControlName="agentControl">
            <mat-option>
              <ngx-mat-select-search (keyup)="applyFilter($event)" placeholderLabel="Rechercher..."
-               noEntriesFoundLabel="404"></ngx-mat-select-search>
+               noEntriesFoundLabel="404">
+             </ngx-mat-select-search>
            </mat-option>
-           <mat-option *ngFor="let a of agents|searchAgentMat:searchTxt" [value]="a">
+           <mat-option *ngFor="let a of agents |searchAgentMat:searchTxt" (onSelectionChange)="onSelectAgent($event)"
+             [value]="a">
              {{a.matricule}} &#8212; {{a.nom}} {{a.prenom}}
            </mat-option>
          </mat-select>
@@ -46,18 +24,40 @@
        </div>
 
      </mat-step>
+     <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
+       <ng-template matStepLabel>Selection d'Equipements</ng-template>
+       <mat-form-field appearance="fill">
+         <mat-label>Equipements</mat-label>
+         <mat-select multiple formControlName="equipementControl">
+
+           <mat-option (onSelectionChange)="onSelect($event)" [value]="e" *ngFor="let e of selectedAgent.equipements">
+             {{e.codeONE}}
+           </mat-option>
+
+         </mat-select>
+       </mat-form-field>
+       <div>
+         <button mat-button matStepperPrevious type="button">Back</button>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
+     </mat-step>
      <mat-step formGroupName="2" [stepControl]="formArray?.get([2])">
        <ng-template matStepLabel>Numéro Mouvement</ng-template>
        <mat-form-field appearance="fill">
          <mat-label>Numero Mouvement</mat-label>
          <input type="text" matInput placeholder="N° Du mouvement" formControlName="mvtControl">
        </mat-form-field>
+       <div>
+         <button mat-button matStepperPrevious type="button">Back</button>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
      </mat-step>
      <mat-step>
        <ng-template matStepLabel>Done</ng-template>
        <p>You are now done.</p>
        <div>
-         <button mat-button [disabled]="!affectationFormGroup.valid" type="submit">Submit</button>
+         <button mat-button type="button" [disabled]="!affectationFormGroup.valid"
+           (click)="onSubmit();reset();stepper.reset();">Submit</button>
          <button mat-button type="button" (click)="reset();stepper.reset();">Reset</button>
        </div>
      </mat-step>

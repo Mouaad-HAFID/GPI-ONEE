@@ -30,7 +30,16 @@ import { AgentService } from 'src/app/_services/agent.service';
   ],
 })
 export class AgentsTabComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['matricule', 'nom', 'dr'];
+  displayedColumns: string[] = [
+    'matricule',
+    'nom',
+    'dr',
+    'dir',
+    'domainePerso',
+    'uniteStruc',
+    'poste',
+    'fonction',
+  ];
   dataSource: MatTableDataSource<Agent[]>;
   expandedElement: Agent | null;
   Equipements: Equipement[];

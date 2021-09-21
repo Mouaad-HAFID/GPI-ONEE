@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -6,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Agent } from 'src/app/_models/agent';
@@ -16,13 +18,12 @@ import { AgentService } from 'src/app/_services/agent.service';
 import { EquipementService } from 'src/app/_services/equipement.service';
 import { MouvementService } from 'src/app/_services/mouvement.service';
 import { TypeEquipementService } from 'src/app/_services/type-equipement.service';
-
 @Component({
-  selector: 'app-affectation-agent',
-  templateUrl: './affectation-agent.component.html',
-  styleUrls: ['./affectation-agent.component.css'],
+  selector: 'app-pret',
+  templateUrl: './pret.component.html',
+  styleUrls: ['./pret.component.css'],
 })
-export class AffectationAgentComponent implements OnInit {
+export class PretComponent implements OnInit {
   affectationFormGroup: FormGroup;
   typeFormGroup: FormGroup;
   equipementFormGroup: FormGroup;
@@ -33,6 +34,7 @@ export class AffectationAgentComponent implements OnInit {
   agents: Agent[];
   selectedEquips: any = [];
   searchTxt: any;
+  currentDate: any;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -46,6 +48,7 @@ export class AffectationAgentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.currentDate = new Date().toLocaleDateString;
     this.onInitData();
 
     this.affectationFormGroup = this._formBuilder.group({
@@ -57,20 +60,32 @@ export class AffectationAgentComponent implements OnInit {
           agentControl: ['', Validators.required],
         }),
         this._formBuilder.group({
+          dateFinPretCtrl: ['', Validators.required],
+        }),
+        this._formBuilder.group({
           mvtControl: ['', Validators.required],
         }),
       ]),
     });
 
     this.equipementFormGroup = this._formBuilder.group({
+      agentControl: ['', Validators.required],
+    });
+    this.equipementFormGroup = this._formBuilder.group({
       equipementControl: ['', Validators.required],
+    });
+    this.equipementFormGroup = this._formBuilder.group({
+      dateFinPretCtrl: ['', Validators.required],
+    });
+    this.equipementFormGroup = this._formBuilder.group({
+      mvtControl: ['', Validators.required],
     });
   }
   get formArray(): AbstractControl | null {
     return this.affectationFormGroup.get('formArray');
   }
+  AfterViewInit() {}
   onInitData() {
-    this.types = [];
     this.equipements = [];
     this.typeService.getAllTypes().subscribe((res) => {
       this.types = res;
@@ -86,7 +101,6 @@ export class AffectationAgentComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.affectationFormGroup.valid);
     if (this.affectationFormGroup.valid) {
       let equips = this.selectedEquips;
       let agent = this.formArray.get([1]).value.agentControl;
@@ -95,11 +109,12 @@ export class AffectationAgentComponent implements OnInit {
         liste = liste.concat(e.codeONE, '/');
       });
       console.log('LISTE' + liste);
+      console.log(this.formArray.get([2]).value.dateFinPretCtrl);
       let mouvement: Mouvement = {
-        numeroMvt: this.formArray.get([2]).value.mvtControl,
-        typeMouvement: 'Affectation',
+        numeroMvt: this.formArray.get([3]).value.mvtControl,
+        typeMouvement: 'Prêt',
         demandeurId: agent.id,
-        dateFinMouvement: null,
+        dateFinMouvement: this.formArray.get([2]).value.dateFinPretCtrl,
         listeEquipements: liste,
       };
 
@@ -155,11 +170,15 @@ export class AffectationAgentComponent implements OnInit {
   }
 
   openSnackbar() {
-    this.snackBar.open('Affectation Success', 'Close');
+    this.snackBar.open('Pret Success', 'Close');
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.searchTxt = filterValue;
+  }
+
+  dateEventHandler(event: MatDatepickerInputEvent<Date>) {
+    console.log(`${event.value.toLocaleDateString()}`);
   }
 }

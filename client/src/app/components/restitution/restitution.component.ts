@@ -16,13 +16,12 @@ import { AgentService } from 'src/app/_services/agent.service';
 import { EquipementService } from 'src/app/_services/equipement.service';
 import { MouvementService } from 'src/app/_services/mouvement.service';
 import { TypeEquipementService } from 'src/app/_services/type-equipement.service';
-
 @Component({
-  selector: 'app-affectation-agent',
-  templateUrl: './affectation-agent.component.html',
-  styleUrls: ['./affectation-agent.component.css'],
+  selector: 'app-restitution',
+  templateUrl: './restitution.component.html',
+  styleUrls: ['./restitution.component.css'],
 })
-export class AffectationAgentComponent implements OnInit {
+export class RestitutionComponent implements OnInit {
   affectationFormGroup: FormGroup;
   typeFormGroup: FormGroup;
   equipementFormGroup: FormGroup;
@@ -30,9 +29,10 @@ export class AffectationAgentComponent implements OnInit {
 
   equipements: Equipement[];
   types: TypeEquipement[];
-  agents: Agent[];
+  agents: Agent[] = [];
   selectedEquips: any = [];
   searchTxt: any;
+  selectedAgent: any = {};
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -65,13 +65,19 @@ export class AffectationAgentComponent implements OnInit {
     this.equipementFormGroup = this._formBuilder.group({
       equipementControl: ['', Validators.required],
     });
+    this.equipementFormGroup = this._formBuilder.group({
+      mvtControl: ['', Validators.required],
+    });
+    this.equipementFormGroup = this._formBuilder.group({
+      agentControl: ['', Validators.required],
+    });
   }
   get formArray(): AbstractControl | null {
     return this.affectationFormGroup.get('formArray');
   }
   onInitData() {
-    this.types = [];
     this.equipements = [];
+    this.agents = [];
     this.typeService.getAllTypes().subscribe((res) => {
       this.types = res;
       this.types.forEach((t) => {
@@ -82,14 +88,17 @@ export class AffectationAgentComponent implements OnInit {
         console.log(this.equipements);
       });
     });
-    this.agentService.getAllAgents().subscribe((res) => (this.agents = res));
+    this.agentService.getAllAgents().subscribe((res) =>
+      res.forEach((r) => {
+        if (r.equipements.length > 0) this.agents.push(r);
+      })
+    );
   }
 
   onSubmit() {
     console.log(this.affectationFormGroup.valid);
     if (this.affectationFormGroup.valid) {
       let equips = this.selectedEquips;
-      let agent = this.formArray.get([1]).value.agentControl;
       let liste: string = '';
       this.selectedEquips.forEach((e) => {
         liste = liste.concat(e.codeONE, '/');
@@ -97,8 +106,7 @@ export class AffectationAgentComponent implements OnInit {
       console.log('LISTE' + liste);
       let mouvement: Mouvement = {
         numeroMvt: this.formArray.get([2]).value.mvtControl,
-        typeMouvement: 'Affectation',
-        demandeurId: agent.id,
+        typeMouvement: 'Restitution',
         dateFinMouvement: null,
         listeEquipements: liste,
       };
@@ -109,11 +117,9 @@ export class AffectationAgentComponent implements OnInit {
         mouvementId = res.id;
         console.log('MOV ID' + mouvementId);
         equips.forEach((e, index, array) => {
-          e.agentId = agent.id;
-          e.mouvementId = mouvementId;
+          e.agentId = null;
           console.log('MOV ID INSIDE FOR EACH' + mouvementId);
           console.log(e.id);
-          console.log(agent.id);
           this.equipementService.affectEquipements(e.id, e).subscribe(
             () => console.log('Update Success'),
             () => {
@@ -150,12 +156,27 @@ export class AffectationAgentComponent implements OnInit {
     console.log(this.selectedEquips);
   }
 
+  onSelectAgent(event) {
+    this.selectedEquips = [];
+    if (event.isUserInput) {
+      if (event.source.selected) {
+        this.selectedAgent = event.source.value;
+      } else {
+        this.selectedAgent = this.selectedAgent.filter(
+          (d) => d !== event.source.value
+        );
+      }
+    }
+    console.log(this.selectedAgent);
+    console.log();
+  }
+
   reset() {
     this.affectationFormGroup.reset();
   }
 
   openSnackbar() {
-    this.snackBar.open('Affectation Success', 'Close');
+    this.snackBar.open(`Restitution Success`, 'Close');
   }
 
   applyFilter(event: Event) {

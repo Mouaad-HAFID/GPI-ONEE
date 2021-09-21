@@ -10,7 +10,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Equipement } from 'src/app/_models/equipement';
+import { AgentService } from 'src/app/_services/agent.service';
+import { DirectionService } from 'src/app/_services/direction.service';
 import { EquipementService } from 'src/app/_services/equipement.service';
+import { GammeService } from 'src/app/_services/gamme.service';
+import { InventaireService } from 'src/app/_services/inventaire.service';
+import { TypeEquipementService } from 'src/app/_services/type-equipement.service';
 
 @Component({
   selector: 'app-equipements-tab',
@@ -28,7 +33,14 @@ import { EquipementService } from 'src/app/_services/equipement.service';
   ],
 })
 export class EquipementsTabComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'nom', 'type'];
+  displayedColumns: string[] = [
+    'id',
+    'serie',
+    'codeONE',
+    'type',
+    'gamme',
+    'codeContrat',
+  ];
   dataSource: MatTableDataSource<Equipement[]>;
   expandedElement: Equipement | null;
   value: string;
@@ -36,7 +48,13 @@ export class EquipementsTabComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   equipements: any;
-  constructor(private equipementservice: EquipementService) {}
+  constructor(
+    private equipementservice: EquipementService,
+    private typeService: TypeEquipementService,
+    private gammeService: GammeService,
+    private inventaireService: InventaireService,
+    private agentService: AgentService
+  ) {}
 
   ngOnInit() {
     this.onGetAllEquipements();
@@ -62,6 +80,20 @@ export class EquipementsTabComponent implements OnInit, AfterViewInit {
       this.dataSource = new MatTableDataSource<Equipement[]>(this.equipements);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.dataSourceConstruct();
     });
+  }
+
+  dataSourceConstruct() {
+    let data = this.equipements;
+    data.forEach((d) => {
+      this.typeService
+        .getTypeById(d.typeEquipementId)
+        .subscribe((res) => (d.type = res.nom));
+      this.gammeService
+        .getGammeById(d.gammeId)
+        .subscribe((res) => (d.gamme = res.code));
+    });
+    console.log(data);
   }
 }
