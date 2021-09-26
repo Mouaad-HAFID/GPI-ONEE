@@ -50,9 +50,9 @@ namespace API.Data
             _context.Entry(equipement).State = EntityState.Modified;
         }
 
-        public async Task<bool> EquipementExists(int serie)
+        public async Task<bool> EquipementExists(int serie, string serieConstructeur)
         {
-            return await _context.Equipements.AnyAsync(Equipement => Equipement.Serie == serie);
+            return await _context.Equipements.AnyAsync(Equipement => Equipement.Serie == serie || Equipement.SerieConstructeur == serieConstructeur.ToLower());
         }
     }
 }

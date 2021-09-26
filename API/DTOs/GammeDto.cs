@@ -10,6 +10,6 @@ namespace API.DTOs
         public string Caracteristiques { get; set; }
         public TypeEquipementDto Type { get; set; }
         public int TypeId { get; set; }
-        public ICollection<EquipementDto> Equipements { get; set; }
+        //public ICollection<EquipementDto> Equipements { get; set; }
     }
 }

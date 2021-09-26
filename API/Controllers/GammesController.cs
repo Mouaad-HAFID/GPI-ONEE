@@ -28,7 +28,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<GammeDto>> AddGamme(GammeDto Gamme)
         {
-            if (await _gammeRepository.GammeExists(Gamme.Code)) return BadRequest("Entré existante");
+            if (await _gammeRepository.GammeExists(Gamme.Code)) return BadRequest("Entrée existante");
             return Ok(await _gammeRepository.AddGamme(Gamme));
         }
     }

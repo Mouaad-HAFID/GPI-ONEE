@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace API.Entities
 {
@@ -12,6 +13,7 @@ namespace API.Entities
 
         public Fournisseur Fournisseur { get; set; }
         public int FournisseurId { get; set; }
+        public ICollection<Equipement> Equipement { get; set; }
 
 
     }

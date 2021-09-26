@@ -27,6 +27,8 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<ContratDto>> AddContrat(ContratDto Contrat)
         {
+            if (await _contratRepository.ContratExists(Contrat.NumeroContrat))
+                return BadRequest("Entrée existante");
             return Ok(await _contratRepository.AddContrat(Contrat));
         }
     }

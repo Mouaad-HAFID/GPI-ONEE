@@ -12,5 +12,6 @@ namespace API.Interfaces
         Task<DirectionDto> AddDirection(DirectionDto direction);
         void Update(Direction direction);
         Task<bool> SaveAllAsync();
+        Task<bool> DirectionExists(string code);
     }
 }

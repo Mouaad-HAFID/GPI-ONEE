@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<ContratDto>> GetAllContratsAsync();
         Task<ContratDto> GetContratById(int id);
         Task<ContratDto> AddContrat(ContratDto Contrat);
+        Task<bool> ContratExists(int numeroContrat);
     }
 }

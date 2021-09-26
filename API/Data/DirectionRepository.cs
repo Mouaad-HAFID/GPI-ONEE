@@ -46,5 +46,9 @@ namespace API.Data
         {
             _context.Entry(direction).State = EntityState.Modified;
         }
+        public async Task<bool> DirectionExists(string code)
+        {
+            return await _context.Direction.AnyAsync(Direction => Direction.CodeDirection == code.ToLower());
+        }
     }
 }

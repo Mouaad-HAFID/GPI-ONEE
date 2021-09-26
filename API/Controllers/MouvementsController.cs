@@ -26,6 +26,11 @@ namespace API.Controllers
         {
             return Ok(await _mouvementRepository.GetMouvementByIdAsync(id));
         }
+        [HttpGet("last")]
+        public async Task<ActionResult<MouvementDto>> GetLastMouvement()
+        {
+            return Ok(await _mouvementRepository.GetLastMouvement());
+        }
         [HttpPost]
         public async Task<ActionResult<MouvementDto>> AddMouvement(MouvementDto mouvement)
         {

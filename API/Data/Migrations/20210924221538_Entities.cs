@@ -29,11 +29,26 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Etats",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Abrev = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Designation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Etats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Fournisseur",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Nom = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CodeFournisseur = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -61,6 +76,7 @@ namespace API.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Matricule = table.Column<int>(type: "int", nullable: false),
                     PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -91,7 +107,7 @@ namespace API.Data.Migrations
                         column: x => x.DemandeurId,
                         principalTable: "Agents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -155,7 +171,7 @@ namespace API.Data.Migrations
                         column: x => x.MouvementId,
                         principalTable: "Mouvements",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -186,11 +202,14 @@ namespace API.Data.Migrations
                     Serie = table.Column<int>(type: "int", nullable: false),
                     CodeONE = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CodeContrat = table.Column<int>(type: "int", nullable: false),
+                    SerieConstructeur = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AgentId = table.Column<int>(type: "int", nullable: true),
                     InventaireId = table.Column<int>(type: "int", nullable: true),
                     TypeEquipementId = table.Column<int>(type: "int", nullable: false),
                     GammeId = table.Column<int>(type: "int", nullable: false),
-                    FournisseurId = table.Column<int>(type: "int", nullable: false)
+                    FournisseurId = table.Column<int>(type: "int", nullable: false),
+                    EtatId = table.Column<int>(type: "int", nullable: true),
+                    ContratId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -200,7 +219,19 @@ namespace API.Data.Migrations
                         column: x => x.AgentId,
                         principalTable: "Agents",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Equipements_Contrats_ContratId",
+                        column: x => x.ContratId,
+                        principalTable: "Contrats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Equipements_Etats_EtatId",
+                        column: x => x.EtatId,
+                        principalTable: "Etats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Equipements_Fournisseur_FournisseurId",
                         column: x => x.FournisseurId,
@@ -218,7 +249,7 @@ namespace API.Data.Migrations
                         column: x => x.InventaireId,
                         principalTable: "Inventaire",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Equipements_TypeEquipement_TypeEquipementId",
                         column: x => x.TypeEquipementId,
@@ -228,24 +259,26 @@ namespace API.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EquipementMouvement",
+                name: "Equipements_Mouvements",
                 columns: table => new
                 {
-                    EquipementsId = table.Column<int>(type: "int", nullable: false),
-                    MouvementsId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MouvementId = table.Column<int>(type: "int", nullable: false),
+                    EquipementId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipementMouvement", x => new { x.EquipementsId, x.MouvementsId });
+                    table.PrimaryKey("PK_Equipements_Mouvements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EquipementMouvement_Equipements_EquipementsId",
-                        column: x => x.EquipementsId,
+                        name: "FK_Equipements_Mouvements_Equipements_EquipementId",
+                        column: x => x.EquipementId,
                         principalTable: "Equipements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_EquipementMouvement_Mouvements_MouvementsId",
-                        column: x => x.MouvementsId,
+                        name: "FK_Equipements_Mouvements_Mouvements_MouvementId",
+                        column: x => x.MouvementId,
                         principalTable: "Mouvements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
@@ -262,14 +295,19 @@ namespace API.Data.Migrations
                 column: "MouvementId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipementMouvement_MouvementsId",
-                table: "EquipementMouvement",
-                column: "MouvementsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Equipements_AgentId",
                 table: "Equipements",
                 column: "AgentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipements_ContratId",
+                table: "Equipements",
+                column: "ContratId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipements_EtatId",
+                table: "Equipements",
+                column: "EtatId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipements_FournisseurId",
@@ -292,6 +330,16 @@ namespace API.Data.Migrations
                 column: "TypeEquipementId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Equipements_Mouvements_EquipementId",
+                table: "Equipements_Mouvements",
+                column: "EquipementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipements_Mouvements_MouvementId",
+                table: "Equipements_Mouvements",
+                column: "MouvementId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Gammes_TypeId",
                 table: "Gammes",
                 column: "TypeId");
@@ -311,10 +359,7 @@ namespace API.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Contrats");
-
-            migrationBuilder.DropTable(
-                name: "EquipementMouvement");
+                name: "Equipements_Mouvements");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -323,13 +368,19 @@ namespace API.Data.Migrations
                 name: "Equipements");
 
             migrationBuilder.DropTable(
-                name: "Fournisseur");
+                name: "Contrats");
+
+            migrationBuilder.DropTable(
+                name: "Etats");
 
             migrationBuilder.DropTable(
                 name: "Gammes");
 
             migrationBuilder.DropTable(
                 name: "Inventaire");
+
+            migrationBuilder.DropTable(
+                name: "Fournisseur");
 
             migrationBuilder.DropTable(
                 name: "TypeEquipement");

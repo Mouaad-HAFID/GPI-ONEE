@@ -49,5 +49,9 @@ namespace API.Data
         {
             _context.Entry(typeEquipement).State = EntityState.Modified;
         }
+        public async Task<bool> TypeExists(string code)
+        {
+            return await _context.TypeEquipement.AnyAsync(Type => Type.Nom == code.ToLower());
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace API.Data
 
         public async Task<bool> FournisseurExists(string code)
         {
-            return await _context.Fournisseur.AnyAsync(Fournisseur => Fournisseur.CodeFournisseur == code);
+            return await _context.Fournisseur.AnyAsync(Fournisseur => Fournisseur.CodeFournisseur == code.ToLower());
         }
 
         public async Task<IEnumerable<FournisseurDto>> GetAllFournisseursAsync()

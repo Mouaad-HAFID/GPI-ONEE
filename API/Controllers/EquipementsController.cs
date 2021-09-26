@@ -36,7 +36,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<EquipementDto>> AddEquipement(EquipementDto equipement)
         {
-            if (await _equipementRepository.EquipementExists(equipement.Serie)) return BadRequest("Entrée existante");
+            if (await _equipementRepository.EquipementExists(equipement.Serie, equipement.SerieConstructeur)) return BadRequest("Entrée existante");
             return await _equipementRepository.AddEquipement(equipement);
         }
 
@@ -45,6 +45,16 @@ namespace API.Controllers
         {
             var equip = await _context.Equipements.Where(e => e.Id == id).SingleOrDefaultAsync();
             _mapper.Map(affectationDto, equip);
+            _equipementRepository.Update(equip);
+            if (await _equipementRepository.SaveAllAsync()) return NoContent();
+            return BadRequest();
+
+        }
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult> UpdateEquipement(int id, EquipementDto equipementDto)
+        {
+            var equip = await _context.Equipements.Where(e => e.Id == id).SingleOrDefaultAsync();
+            _mapper.Map(equipementDto, equip);
             _equipementRepository.Update(equip);
             if (await _equipementRepository.SaveAllAsync()) return NoContent();
             return BadRequest();

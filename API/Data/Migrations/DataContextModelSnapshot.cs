@@ -65,6 +65,9 @@ namespace API.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Matricule")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");
 
@@ -147,6 +150,12 @@ namespace API.Data.Migrations
                     b.Property<string>("CodeONE")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ContratId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EtatId")
+                        .HasColumnType("int");
+
                     b.Property<int>("FournisseurId")
                         .HasColumnType("int");
 
@@ -159,12 +168,19 @@ namespace API.Data.Migrations
                     b.Property<int>("Serie")
                         .HasColumnType("int");
 
+                    b.Property<string>("SerieConstructeur")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("TypeEquipementId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AgentId");
+
+                    b.HasIndex("ContratId");
+
+                    b.HasIndex("EtatId");
 
                     b.HasIndex("FournisseurId");
 
@@ -177,6 +193,46 @@ namespace API.Data.Migrations
                     b.ToTable("Equipements");
                 });
 
+            modelBuilder.Entity("API.Entities.Equipement_Mouvement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("EquipementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MouvementId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EquipementId");
+
+                    b.HasIndex("MouvementId");
+
+                    b.ToTable("Equipements_Mouvements");
+                });
+
+            modelBuilder.Entity("API.Entities.Etat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Abrev")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Designation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Etats");
+                });
+
             modelBuilder.Entity("API.Entities.Fournisseur", b =>
                 {
                     b.Property<int>("Id")
@@ -185,6 +241,9 @@ namespace API.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("CodeFournisseur")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nom")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -280,21 +339,6 @@ namespace API.Data.Migrations
                     b.ToTable("TypeEquipement");
                 });
 
-            modelBuilder.Entity("EquipementMouvement", b =>
-                {
-                    b.Property<int>("EquipementsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MouvementsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EquipementsId", "MouvementsId");
-
-                    b.HasIndex("MouvementsId");
-
-                    b.ToTable("EquipementMouvement");
-                });
-
             modelBuilder.Entity("API.Entities.Contrat", b =>
                 {
                     b.HasOne("API.Entities.Fournisseur", "Fournisseur")
@@ -321,6 +365,14 @@ namespace API.Data.Migrations
                         .WithMany("Equipements")
                         .HasForeignKey("AgentId");
 
+                    b.HasOne("API.Entities.Contrat", "Contrat")
+                        .WithMany("Equipement")
+                        .HasForeignKey("ContratId");
+
+                    b.HasOne("API.Entities.Etat", "Etat")
+                        .WithMany("Equipements")
+                        .HasForeignKey("EtatId");
+
                     b.HasOne("API.Entities.Fournisseur", "Fournisseur")
                         .WithMany("Equipements")
                         .HasForeignKey("FournisseurId")
@@ -345,6 +397,10 @@ namespace API.Data.Migrations
 
                     b.Navigation("Agent");
 
+                    b.Navigation("Contrat");
+
+                    b.Navigation("Etat");
+
                     b.Navigation("Fournisseur");
 
                     b.Navigation("Gamme");
@@ -352,6 +408,25 @@ namespace API.Data.Migrations
                     b.Navigation("Inventaire");
 
                     b.Navigation("TypeEquipement");
+                });
+
+            modelBuilder.Entity("API.Entities.Equipement_Mouvement", b =>
+                {
+                    b.HasOne("API.Entities.Equipement", "Equipement")
+                        .WithMany("Equipement_Mouvements")
+                        .HasForeignKey("EquipementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.Entities.Mouvement", "Mouvement")
+                        .WithMany("Equipement_Mouvements")
+                        .HasForeignKey("MouvementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Equipement");
+
+                    b.Navigation("Mouvement");
                 });
 
             modelBuilder.Entity("API.Entities.Gamme", b =>
@@ -385,21 +460,6 @@ namespace API.Data.Migrations
                     b.Navigation("Demandeur");
                 });
 
-            modelBuilder.Entity("EquipementMouvement", b =>
-                {
-                    b.HasOne("API.Entities.Equipement", null)
-                        .WithMany()
-                        .HasForeignKey("EquipementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Entities.Mouvement", null)
-                        .WithMany()
-                        .HasForeignKey("MouvementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("API.Entities.Agent", b =>
                 {
                     b.Navigation("Equipements");
@@ -407,9 +467,24 @@ namespace API.Data.Migrations
                     b.Navigation("Mouvements");
                 });
 
+            modelBuilder.Entity("API.Entities.Contrat", b =>
+                {
+                    b.Navigation("Equipement");
+                });
+
             modelBuilder.Entity("API.Entities.Direction", b =>
                 {
                     b.Navigation("Inventaire");
+                });
+
+            modelBuilder.Entity("API.Entities.Equipement", b =>
+                {
+                    b.Navigation("Equipement_Mouvements");
+                });
+
+            modelBuilder.Entity("API.Entities.Etat", b =>
+                {
+                    b.Navigation("Equipements");
                 });
 
             modelBuilder.Entity("API.Entities.Fournisseur", b =>
@@ -427,6 +502,11 @@ namespace API.Data.Migrations
             modelBuilder.Entity("API.Entities.Inventaire", b =>
                 {
                     b.Navigation("Equipements");
+                });
+
+            modelBuilder.Entity("API.Entities.Mouvement", b =>
+                {
+                    b.Navigation("Equipement_Mouvements");
                 });
 
             modelBuilder.Entity("API.Entities.TypeEquipement", b =>

@@ -10,17 +10,18 @@ namespace API.DTOs
         public int Serie { get; set; }
         public string CodeONE { get; set; }
         public int CodeContrat { get; set; }
+        public string SerieConstructeur { get; set; }
 
         //?Relations
         public AgentDto Agent { get; set; }
         public int? AgentId { get; set; } = null;
         public int? InventaireId { get; set; } = null;
-        public ICollection<MouvementDto> Mouvements { get; set; }
         public int TypeEquipementId { get; set; }
+        public GammeDto Gamme { get; set; }
         public int GammeId { get; set; }
-        public FournisseurDto Fournisseur { get; set; }
         public int FournisseurId { get; set; }
-        // public ContratDto Contrat { get; set; }
-
+        public EtatDto Etat { get; set; }
+        public int EtatId { get; set; }
+        public int ContratId { get; set; }
     }
 }

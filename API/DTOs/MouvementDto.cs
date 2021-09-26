@@ -17,6 +17,8 @@ namespace API.DTOs
 
         public AgentDto Demandeur { get; set; }
         public int? DemandeurId { get; set; } = null;
-        public ICollection<EquipementDto> Equipements { get; set; }
+        public List<int> EquipementsId { get; set; }
+        public List<string> Equipements { get; set; }
+        public List<Equipement_Mouvement> Equipement_Mouvements { get; set; }
     }
 }

@@ -24,8 +24,10 @@ namespace API.Data
         public async Task<GammeDto> AddGamme(GammeDto gamme)
         {
             Gamme NewGamme = new Gamme();
+            var g = _mapper.Map(gamme, NewGamme);
             _context.Gammes.Add(_mapper.Map(gamme, NewGamme));
             await _context.SaveChangesAsync();
+            gamme.Id = g.Id;
             return gamme;
         }
 

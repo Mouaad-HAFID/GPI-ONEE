@@ -38,6 +38,10 @@ namespace API.Data
         {
             return await _context.Contrats.Where(c => c.Id == id).ProjectTo<ContratDto>(_mapper.ConfigurationProvider).SingleOrDefaultAsync();
         }
+        public async Task<bool> ContratExists(int numeroContrat)
+        {
+            return await _context.Contrats.AnyAsync(Contrat => Contrat.NumeroContrat == numeroContrat);
+        }
 
         public async Task<bool> SaveAllAsync()
         {

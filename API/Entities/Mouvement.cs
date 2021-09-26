@@ -17,8 +17,7 @@ namespace API.Entities
         //?Relations
         public Agent Demandeur { get; set; }
         public int? DemandeurId { get; set; } = null;
-        public ICollection<Equipement> Equipements { get; set; }
-
+        public List<Equipement_Mouvement> Equipement_Mouvements { get; set; }
 
     }
 }

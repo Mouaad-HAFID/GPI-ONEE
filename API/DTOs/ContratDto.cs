@@ -14,6 +14,6 @@ namespace API.DTOs
         public FournisseurDto Fournisseur { get; set; }
         public int FournisseurId { get; set; }
 
-        public ICollection<EquipementDto> Equipements { get; set; }
+        public ICollection<EquipementDto> Equipement { get; set; }
     }
 }

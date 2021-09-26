@@ -11,5 +11,6 @@ namespace API.Interfaces
         Task<IEnumerable<TypeEquipementDto>> GetAllTypesAsync();
         Task<TypeEquipementDto> GetTypeById(int id);
         Task<TypeEquipementDto> AddType(TypeEquipementDto typeEquipement);
+        Task<bool> TypeExists(string code);
     }
 }
