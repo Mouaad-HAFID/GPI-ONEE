@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "qd/BIEpyq58c34hPwJgB05kL0cUZHeVOO8Z+DY++UD8lLw96blRB2i5EqWm/hi0D3OAX/sK2qsLbr7lKzhOPjQ==",
+  "dgSpecHash": "JBYqnxpQE0QcnREGyoodGUkuCOvEfCFKOttPX3Zp1N1FLQ9F1Dx2ZIuaFepACLEthwmPojtVdkx7ULUJJapETw==",
   "success": true,
   "projectFilePath": "C:\\Users\\fleur\\Desktop\\GPI-ONEE\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fleur\\.nuget\\packages\\aspose.words\\21.9.0\\aspose.words.21.9.0.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
+    "C:\\Users\\fleur\\.nuget\\packages\\documentformat.openxml\\2.13.1\\documentformat.openxml.2.13.1.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.3\\microsoft.aspnetcore.authentication.jwtbearer.5.0.3.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.10\\microsoft.aspnetcore.jsonpatch.5.0.10.nupkg.sha512",
@@ -70,6 +71,7 @@
     "C:\\Users\\fleur\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\system.io.filesystem\\4.3.0\\system.io.filesystem.4.3.0.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\system.io.filesystem.primitives\\4.3.0\\system.io.filesystem.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\fleur\\.nuget\\packages\\system.io.packaging\\4.7.0\\system.io.packaging.4.7.0.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\system.linq\\4.3.0\\system.linq.4.3.0.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\fleur\\.nuget\\packages\\system.net.nameresolution\\4.3.0\\system.net.nameresolution.4.3.0.nupkg.sha512",

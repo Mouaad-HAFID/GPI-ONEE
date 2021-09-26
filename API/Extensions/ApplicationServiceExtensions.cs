@@ -23,7 +23,7 @@ namespace API.Extensions
             services.AddScoped<IContratRepository, ContratRepository>();
             services.AddScoped<IGammeRepository, GammeRepository>();
             services.AddScoped<ITypeRepository, TypeRepository>();
-
+            services.AddScoped<IEtatRepository, EtatRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(optionsAction =>
             {

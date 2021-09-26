@@ -28,7 +28,9 @@
                 <div mat-line>{{element.agent.matricule}} &#8212; {{element.agent.nom}}</div>
               </mat-list-item>
               <mat-list-item>
-                <button mat-raised-button (click)="onEdit(element)">edit</button>
+                <button mat-raised-button (click)="onEdit(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
               </mat-list-item>
             </mat-list>
           </span>
