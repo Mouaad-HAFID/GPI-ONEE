@@ -10,5 +10,7 @@ export interface Mouvement {
   demandeurId?: number;
   demandeur?: Agent;
   listeEquipements?: string;
-  equipements?: Equipement[];
+  equipements?: string[];
+  equipementsId?: number[];
+  equipement_mouvements?: any;
 }

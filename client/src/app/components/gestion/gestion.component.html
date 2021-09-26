@@ -1,3 +1,61 @@
-<mat-card>
-  <app-import-agents></app-import-agents>
+<mat-vertical-stepper class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;" orientation="vertical"
+  #stepper>
+
+  <mat-step>
+    <ng-template matStepLabel>Import des Agents</ng-template>
+    <mat-label>Cliquez sur l'icône et sélectionnez un fichier .CSV valide pour ajouter les informations à la base de
+      données</mat-label>
+    <p style="margin-top: 20px;">
+      <app-import-agents></app-import-agents>
+    </p>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Import des Fournisseurs</ng-template>
+    <mat-label>Cliquez sur l'icône et sélectionnez un fichier .CSV valide pour ajouter les informations à la base de
+      données</mat-label>
+    <p style="margin-top: 20px;">
+      <app-import-fournisseurs></app-import-fournisseurs>
+    </p>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Import des Contrats</ng-template>
+    <mat-label>Cliquez sur l'icône et sélectionnez un fichier .CSV valide pour ajouter les informations à la base de
+      données</mat-label>
+    <p style="margin-top: 20px;">
+      <app-import-contrats></app-import-contrats>
+    </p>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Import des Status d'Equipements</ng-template>
+    <mat-label>Cliquez sur l'icône et sélectionnez un fichier .CSV valide pour ajouter les informations à la base de
+      données</mat-label>
+    <p style="margin-top: 20px;">
+      <app-import-etats></app-import-etats>
+    </p>
+
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Import des Equipements</ng-template>
+    <mat-label>Cliquez sur l'icône et sélectionnez un fichier .CSV valide pour ajouter les informations à la base de
+      données</mat-label>
+    <p style="margin-top: 20px;">
+      <app-import-equipements></app-import-equipements>
+    </p>
+
+  </mat-step>
+
+</mat-vertical-stepper>
+
+<mat-card class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;">
+  <span class="mat-display-1">N.B: Pour Réussir l'import il faut:</span>
+  <ul>
+    <li>Respecter la structure des fichiers CSV</li>
+    <li>Respecter l'ordre des imports (Fournisseurs-->Contrats-->Status-->Type/Gammes(Ajout manuel)-->Equipements)</li>
+    <li>Au cas où l'import d'une entrée échoue une fenêtre d'alerte va vous renseigner les entrées erronées </li>
+  </ul>
 </mat-card>

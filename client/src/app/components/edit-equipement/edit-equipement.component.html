@@ -1,0 +1,63 @@
+<div class="mat-elevation-z10" style="width: 40%;margin: 20px auto;padding:50px;background-color: #fff;">
+  <mat-card class="mat-elevation-z5" style="margin-bottom: 30px;background-color: #3f51b5;">
+    <mat-card-header>
+      <mat-card-title style=" padding-bottom: 30px;color: #fff;">
+        Modification
+      </mat-card-title>
+      <mat-card-subtitle style="color:#fafafa">
+        Remplissez le formulaire ci-dessous avec les informations appropriées pour modifier l'équipement choisi
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  <form style="display: grid;" (ngSubmit)="onSubmit()" [formGroup]="addEquipementFormGroup" #formDirective="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>
+        N° de Serie Constructeur</mat-label>
+      <input type="text" matInput formControlName="numSerieCtrl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>
+        N° de Serie</mat-label>
+      <input type="text" matInput formControlName="codeOneCtrl">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fournisseur</mat-label>
+      <mat-select formControlName="fournisseurCtrl">
+        <mat-option (onSelectionChange)="onSelectFournisseur($event)" *ngFor=" let f of fournisseurs" [value]="f">
+          {{f.nom}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Contrat</mat-label>
+      <mat-select formControlName="codeContratCtrl">
+        <mat-option *ngFor=" let c of contrats" [value]="c">{{c.numeroContrat}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type d'Equipement</mat-label>
+      <mat-select formControlName="typeCtrl">
+        <mat-option (onSelectionChange)="onSelect($event)" *ngFor=" let t of types" [value]="t">{{t.nom|uppercase}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Gammes</mat-label>
+      <mat-select formControlName="gammeCtrl">
+        <mat-option *ngFor=" let g of type.gammes" [value]="g">{{g.code}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="statusCtrlName">
+        <mat-option *ngFor=" let e of etats" [value]="e">
+          <span>{{e.abrev}} - {{e.designation}}</span>
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button style="width:20%; margin-top: 30px;" mat-raised-button color="primary" type="submit">Submit</button>
+
+  </form>
+</div>

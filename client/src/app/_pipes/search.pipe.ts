@@ -9,7 +9,12 @@ export class SearchPipe implements PipeTransform {
     if (!items || !items.length) return items;
     if (!searchTxt || !searchTxt.length) return items;
     return items.filter((item) => {
-      return item.codeONE.toLowerCase().indexOf(searchTxt.toLowerCase()) > -1;
+      return (
+        (item.codeONE.toLowerCase().indexOf(searchTxt.toLowerCase()) &&
+          item.serieConstructeur
+            .toLowerCase()
+            .indexOf(searchTxt.toLowerCase())) > -1
+      );
     });
   }
 }

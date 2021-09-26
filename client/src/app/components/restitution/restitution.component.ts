@@ -10,10 +10,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Agent } from 'src/app/_models/agent';
 import { Equipement } from 'src/app/_models/equipement';
+import { Etat } from 'src/app/_models/etat';
 import { Mouvement } from 'src/app/_models/mouvement';
 import { TypeEquipement } from 'src/app/_models/typeEquipement';
 import { AgentService } from 'src/app/_services/agent.service';
 import { EquipementService } from 'src/app/_services/equipement.service';
+import { EtatService } from 'src/app/_services/etat.service';
 import { MouvementService } from 'src/app/_services/mouvement.service';
 import { TypeEquipementService } from 'src/app/_services/type-equipement.service';
 @Component({
@@ -33,7 +35,8 @@ export class RestitutionComponent implements OnInit {
   selectedEquips: any = [];
   searchTxt: any;
   selectedAgent: any = {};
-
+  etats: Etat[];
+  lastMvt: any;
   constructor(
     private _formBuilder: FormBuilder,
     private typeService: TypeEquipementService,
@@ -42,12 +45,19 @@ export class RestitutionComponent implements OnInit {
     private mouvementService: MouvementService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private etatService: EtatService
   ) {}
 
   ngOnInit() {
+    this.mouvementService.getLastMouvement().subscribe((res) => {
+      console.log(res);
+      if (res !== null) this.lastMvt = res.numeroMvt + 1;
+      else this.lastMvt = 1;
+      console.log(this.lastMvt);
+    });
     this.onInitData();
-
+    this.etatService.getAllEtats().subscribe((res) => (this.etats = res));
     this.affectationFormGroup = this._formBuilder.group({
       formArray: this._formBuilder.array([
         this._formBuilder.group({
@@ -57,7 +67,10 @@ export class RestitutionComponent implements OnInit {
           agentControl: ['', Validators.required],
         }),
         this._formBuilder.group({
-          mvtControl: ['', Validators.required],
+          mvtControl: [
+            '',
+            [Validators.required, Validators.pattern('^[0-9]*$')],
+          ],
         }),
       ]),
     });
@@ -100,8 +113,10 @@ export class RestitutionComponent implements OnInit {
     if (this.affectationFormGroup.valid) {
       let equips = this.selectedEquips;
       let liste: string = '';
+      let equipementsId: number[] = [];
       this.selectedEquips.forEach((e) => {
         liste = liste.concat(e.codeONE, '/');
+        equipementsId.push(e.id);
       });
       console.log('LISTE' + liste);
       let mouvement: Mouvement = {
@@ -109,6 +124,7 @@ export class RestitutionComponent implements OnInit {
         typeMouvement: 'Restitution',
         dateFinMouvement: null,
         listeEquipements: liste,
+        equipementsId: equipementsId,
       };
 
       console.log(mouvement);
@@ -118,6 +134,7 @@ export class RestitutionComponent implements OnInit {
         console.log('MOV ID' + mouvementId);
         equips.forEach((e, index, array) => {
           e.agentId = null;
+          e.etatId = this.etats.find((e) => e.abrev === 'S').id;
           console.log('MOV ID INSIDE FOR EACH' + mouvementId);
           console.log(e.id);
           this.equipementService.affectEquipements(e.id, e).subscribe(
@@ -132,7 +149,9 @@ export class RestitutionComponent implements OnInit {
               if (index === array.length - 1) {
                 // This is the last one.
                 console.log(e);
-                window.location.reload();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1500);
                 this.openSnackbar();
               }
             }

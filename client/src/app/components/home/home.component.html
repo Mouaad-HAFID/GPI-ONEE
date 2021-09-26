@@ -1,26 +1,119 @@
-<div class="links-container" style="display: grid;margin: 60px auto;width: 70%;row-gap: 5%;">
-  <div class="card-container"
-    style="display: flex; justify-content: space-around; width: 100%;grid-row-start: 1;grid-row-end: 1;">
-    <a routerLink="/admin/agents">
-      <mat-card matRipple class="link-card mat-elevation-z6">Agents</mat-card>
-    </a>
-    <a routerLink="/admin/equipements">
-      <mat-card matRipple class="link-card mat-elevation-z6">Equipements</mat-card>
-    </a>
-    <a routerLink="/admin/saisie">
-      <mat-card matRipple class="link-card mat-elevation-z6">Saisie</mat-card>
-    </a>
+<div class="header">
+  <div
+    style="width: 90%;position: absolute;z-index: 0;text-align: center;top: 15%;left: 50%;transform: translate(-50%,-50%);">
+    <span style="font-size: 38px;font-weight: bold;line-height: 56px;margin: 15px 5px;color: white;"
+      class="mat-display-3">Application de gestion du parc informatique</span>
+    <p class="mat-display-3" style="font-size: 28px;font-weight: 300;line-height: 28px;margin: 15px 0 25px;color:#fff">
+      Direction Moyens Communs / Division Moyens Généraux</p>
   </div>
-  <div class="card-container"
-    style="display: flex; justify-content: space-around; width: 100%;grid-row-start: 2;grid-row-end: 2;">
-    <a routerLink="/admin/mouvements">
-      <mat-card matRipple class="link-card mat-elevation-z6">Mouvements</mat-card>
-    </a>
-    <a routerLink="/admin/affectation">
-      <mat-card matRipple class="link-card mat-elevation-z6">Affectation</mat-card>
-    </a>
-    <a routerLink="/admin/gestion">
-      <mat-card matRipple class="link-card mat-elevation-z6">Gestion</mat-card>
-    </a>
-  </div>
+
+</div>
+<div class="links-container mat-elevation-z20" style="z-index: 40;">
+  <mat-grid-list style="width: 90%;margin: 0 auto;padding-top: 20px;" cols="3" rowHeight="2:1">
+    <mat-grid-tile><a routerLink="/admin/agents">
+        <mat-card matRipple class="link-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>people</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Consultation Agent & Equipements
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Consultation des agents et équipements affectés
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+    <mat-grid-tile><a routerLink="/admin/equipements">
+        <mat-card matRipple class="link-card mat-elevation-z6">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>devices</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Consultation équipement et agent bénéficiaire
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Consultation de la liste des équipements et agents bénéficiaires
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+    <mat-grid-tile><a routerLink="/admin/saisie">
+        <mat-card matRipple class="link-card mat-elevation-z6">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>add_to_queue</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Ajout équipement
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Ajout manuel d'un nouveau équipement
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+    <mat-grid-tile><a routerLink="/admin/mouvements">
+        <mat-card matRipple class="link-card mat-elevation-z6">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>swap_horiz</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Mouvements
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Consultez l'historique des opérations effectuées ainsi que des informations supplémentaires
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+    <mat-grid-tile><a routerLink="/admin/operations">
+        <mat-card matRipple class="link-card mat-elevation-z6">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>settings_ethernet</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Opérations
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Affecter, prêter ou restituer un ou plusieurs équipements
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+    <mat-grid-tile><a routerLink="/admin/gestion">
+        <mat-card matRipple class="link-card mat-elevation-z6">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>tune</mat-icon>
+            </mat-card-title>
+            <mat-card-subtitle>
+              Gestion
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              Importer l'ensemble des données necessaires pour le fonctionnement de l'application ou ajoutez-le
+              manuellement
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a></mat-grid-tile>
+
+  </mat-grid-list>
+
 </div>

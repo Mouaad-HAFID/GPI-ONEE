@@ -15,10 +15,13 @@
 .header {
   flex: 0 1 auto;
 }
-.sidenav {
-  padding: 20px;
-}
 
 .container {
   flex: 1 1 auto;
+}
+
+@media print {
+  .header {
+    display: none;
+  }
 }

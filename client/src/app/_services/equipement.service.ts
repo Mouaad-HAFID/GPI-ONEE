@@ -23,4 +23,10 @@ export class EquipementService {
   affectEquipements(id: number, update: Equipement): Observable<Equipement> {
     return this.http.put<Equipement>(`${this.host}/equipements/${id}`, update);
   }
+  updateEquipement(id: number, data: any): Observable<Equipement> {
+    return this.http.put<Equipement>(
+      `${this.host}/equipements/update/${id}`,
+      data
+    );
+  }
 }

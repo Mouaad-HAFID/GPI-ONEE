@@ -1,11 +1,21 @@
-<div class="mat-elevation-z10" style="width: 40%;margin: 20px auto;padding:50px;">
-  <mat-card style="margin-bottom: 30px;"></mat-card>
-  <form style="display: grid;" (ngSubmit)="onSubmit();" [formGroup]=" addTypeFormGroup">
+<div class="mat-elevation-z10" style="width: 40%;margin: 20px auto;padding:50px;background-color: #fff;">
+  <mat-card class="mat-elevation-z5" style="margin-bottom: 30px;background-color: #3f51b5;">
+    <mat-card-header>
+      <mat-card-title style=" padding-bottom: 30px;color: #fff;">
+        Ajouter Manuellement un nouveau type d'équipement
+      </mat-card-title>
+      <mat-card-subtitle style="color:#fafafa">
+        Remplissez le formulaire ci-dessous avec les informations appropriées pour ajouter un nouveau type d'équipement
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+  <form style="display: grid;" (ngSubmit)="onSubmit();" [formGroup]=" addTypeFormGroup" #formDirective="ngForm">
     <mat-form-field appearance="fill">
-      <mat-label>Code ONE</mat-label>
+      <mat-label>Type</mat-label>
       <input type="text" matInput formControlName="nomTypeCtrl">
     </mat-form-field>
-    <div formArrayName="gammes" *ngFor="let gamme of gammes().controls; let i=index">
+    <div style="display: flex;justify-content: space-between;" formArrayName="gammes"
+      *ngFor="let gamme of gammes().controls; let i=index">
       <mat-form-field appearance="fill" [formGroupName]="i">
         <mat-label>Code Gamme</mat-label>
         <input type="text" matInput formControlName="code">
@@ -14,7 +24,7 @@
         <mat-label>caracteristiques</mat-label>
         <input type="text" matInput formControlName="caracteristiques">
       </mat-form-field>
-      <button mat-mini-fab color="secondary" (click)="removeGammeField(i)" type="button">
+      <button mat-mini-fab color="warn" (click)="removeGammeField(i)" type="button">
         <mat-icon>remove</mat-icon>
       </button>
     </div>
@@ -22,7 +32,7 @@
       <mat-icon>add</mat-icon>
     </button>
 
-    <button style="width:20%; margin-top: 30px;" mat-raised-button color="primary" type="submit"
+    <button style="width:20%; margin-top: 30px;" color="primary" mat-raised-button color="primary" type="submit"
       [disabled]="!addTypeFormGroup.valid">Submit</button>
 
   </form>

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AgentService } from 'src/app/_services/agent.service';
 export class CsvData {
   public matricule: any;
@@ -18,10 +19,14 @@ export class CsvData {
 })
 export class ImportAgentsComponent implements OnInit {
   public records: any[] = [];
+  success: boolean = true;
 
   @ViewChild('csvReader') csvReader: any;
 
-  constructor(private agentService: AgentService) {}
+  constructor(
+    private agentService: AgentService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
 
@@ -43,7 +48,7 @@ export class ImportAgentsComponent implements OnInit {
           csvRecordsArray,
           headersRow.length
         );
-
+        this.success = true;
         this.records.forEach((r, index, arr) => {
           let agent = {
             matricule: r.matricule,
@@ -56,9 +61,24 @@ export class ImportAgentsComponent implements OnInit {
             fonction: r.Fonction,
             uniteStruc: r.UniteStruc,
           };
-          this.agentService
-            .addAgent(agent)
-            .subscribe(() => console.log('IMPORT SUCCESS'));
+          this.agentService.addAgent(agent).subscribe(
+            () => {
+              console.log(this.success);
+              console.log(`idx:${index} arrlen: ${arr.length - 1}`);
+              if (index === arr.length - 1 && this.success !== false) {
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1500);
+                this.openSnackbar();
+              }
+            },
+            () => {
+              this.success = false;
+              alert(
+                `Erreur lors de l'insertion de l'agent: ${agent.matricule}`
+              );
+            }
+          );
         });
       };
 
@@ -110,5 +130,8 @@ export class ImportAgentsComponent implements OnInit {
   fileReset() {
     this.csvReader.nativeElement.value = '';
     this.records = [];
+  }
+  openSnackbar() {
+    this.snackBar.open(`Import Des Agents Réussis`, 'Close');
   }
 }

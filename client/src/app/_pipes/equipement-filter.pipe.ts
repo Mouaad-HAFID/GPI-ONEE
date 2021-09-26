@@ -8,7 +8,7 @@ export class EquipementFilterPipe implements PipeTransform {
   transform(equipements: Equipement[]): any[] {
     let equipsToReturn: any[] = [];
     equipements.forEach((e) => {
-      if (e.agentId === null) {
+      if (e.etat.abrev === 'S') {
         equipsToReturn.push(e);
       }
     });

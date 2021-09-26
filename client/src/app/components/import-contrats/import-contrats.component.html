@@ -1,0 +1,5 @@
+<label style="cursor:pointer" for="importContrats">
+  <mat-icon>upload_file</mat-icon>
+</label>
+<input type="file" #csvReader name="Upload CSV" id="importContrats" (change)="uploadListener($event)" accept=".csv"
+  style="display: none;" />

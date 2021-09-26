@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  FormGroupDirective,
   Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +19,7 @@ import { TypeEquipementService } from 'src/app/_services/type-equipement.service
 })
 export class AddTypeComponent implements OnInit {
   addTypeFormGroup: FormGroup;
-
+  @ViewChild(FormGroupDirective) ngForm;
   constructor(
     private _formBuilder: FormBuilder,
     private typeService: TypeEquipementService,
@@ -41,14 +42,26 @@ export class AddTypeComponent implements OnInit {
       this.typeService.addType(type).subscribe((res) => {
         let gammes = this.addTypeFormGroup.value.gammes;
         if (gammes.length !== 0) {
-          gammes.forEach((g) => {
+          gammes.forEach((g, i, arr) => {
             g.typeId = res.id;
-            this.gammeService.addGamme(g).subscribe();
+            this.gammeService.addGamme(g).subscribe(
+              () => {},
+              () => alert("Erreur Lors de l'ajout de la gamme" + g.code),
+              () => {
+                if (i === arr.length - 1) {
+                  this.openSnackbar();
+                  setTimeout(() => {
+                    window.location.reload();
+                  }, 1500);
+                }
+              }
+            );
           });
         }
         this.reset();
         this.openSnackbar();
       });
+      () => alert('Erreur Dans la création du type');
     }
   }
   gammes(): FormArray {
@@ -72,6 +85,7 @@ export class AddTypeComponent implements OnInit {
 
   reset() {
     this.gammes().clear();
+    this.ngForm.resetForm();
     this.addTypeFormGroup.reset();
   }
 

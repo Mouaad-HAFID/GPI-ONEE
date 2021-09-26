@@ -9,6 +9,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Equipement } from 'src/app/_models/equipement';
 import { AgentService } from 'src/app/_services/agent.service';
 import { DirectionService } from 'src/app/_services/direction.service';
@@ -40,10 +41,12 @@ export class EquipementsTabComponent implements OnInit, AfterViewInit {
     'type',
     'gamme',
     'codeContrat',
+    'etat',
   ];
   dataSource: MatTableDataSource<Equipement[]>;
   expandedElement: Equipement | null;
   value: string;
+  editElement;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -53,7 +56,8 @@ export class EquipementsTabComponent implements OnInit, AfterViewInit {
     private typeService: TypeEquipementService,
     private gammeService: GammeService,
     private inventaireService: InventaireService,
-    private agentService: AgentService
+    private agentService: AgentService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -93,7 +97,12 @@ export class EquipementsTabComponent implements OnInit, AfterViewInit {
       this.gammeService
         .getGammeById(d.gammeId)
         .subscribe((res) => (d.gamme = res.code));
+      d.etat = d.etat.abrev;
     });
     console.log(data);
+  }
+  onEdit(element) {
+    console.log(element);
+    this.router.navigateByUrl(`/admin/equipements/edit/${element.id}`);
   }
 }

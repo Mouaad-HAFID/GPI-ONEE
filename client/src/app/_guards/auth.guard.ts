@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -13,7 +14,7 @@ import { AccountService } from '../_services/account.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private AccountService: AccountService) {}
+  constructor(private AccountService: AccountService, private router: Router) {}
   canActivate(): Observable<boolean> {
     return this.AccountService.CurrentUser$.pipe(
       map((user) => {

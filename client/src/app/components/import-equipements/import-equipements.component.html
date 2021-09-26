@@ -1,1 +1,5 @@
-<p>import-equipements works!</p>
+<label style="cursor:pointer" for="importEquipements">
+  <mat-icon>upload_file</mat-icon>
+</label>
+<input type="file" #csvReader name="Upload CSV" id="importEquipements" (change)="uploadListener($event)" accept=".csv"
+  style="display: none;" />

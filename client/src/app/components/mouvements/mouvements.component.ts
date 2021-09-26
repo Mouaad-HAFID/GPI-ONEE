@@ -10,6 +10,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Equipement } from 'src/app/_models/equipement';
 import { Mouvement } from 'src/app/_models/mouvement';
 import { AgentService } from 'src/app/_services/agent.service';
@@ -52,7 +53,8 @@ export class MouvementsComponent implements OnInit {
   constructor(
     private mouvementService: MouvementService,
     private agentService: AgentService,
-    private equipementService: EquipementService
+    private equipementService: EquipementService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -88,5 +90,9 @@ export class MouvementsComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+  }
+  onEdit(id) {
+    console.log(id);
+    this.router.navigateByUrl(`/admin/mouvements/fiche/${id}`);
   }
 }

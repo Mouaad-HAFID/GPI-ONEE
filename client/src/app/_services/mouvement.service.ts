@@ -13,7 +13,13 @@ export class MouvementService {
   getAllMouvements(): Observable<Mouvement[]> {
     return this.http.get<Mouvement[]>(`${this.host}/mouvements`);
   }
+  getMouvementById(id: number): Observable<Mouvement> {
+    return this.http.get<Mouvement>(`${this.host}/mouvements/${id}`);
+  }
   addMouvement(data: Mouvement): Observable<Mouvement> {
     return this.http.post<Mouvement>(`${this.host}/mouvements`, data);
+  }
+  getLastMouvement(): Observable<Mouvement> {
+    return this.http.get<Mouvement>(`${this.host}/mouvements/last`);
   }
 }

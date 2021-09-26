@@ -34,6 +34,11 @@ import { RestitutionComponent } from './components/restitution/restitution.compo
 import { PretComponent } from './components/pret/pret.component';
 import { EquipementFilterPipe } from './_pipes/equipement-filter.pipe';
 import { AddTypeComponent } from './components/add-type/add-type.component';
+import { ImportEtatsComponent } from './components/import-etats/import-etats.component';
+import { ImportFournisseursComponent } from './components/import-fournisseurs/import-fournisseurs.component';
+import { ImportContratsComponent } from './components/import-contrats/import-contrats.component';
+import { EditEquipementComponent } from './components/edit-equipement/edit-equipement.component';
+import { FicheMouvementComponent } from './components/fiche-mouvement/fiche-mouvement.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +70,11 @@ import { AddTypeComponent } from './components/add-type/add-type.component';
     PretComponent,
     EquipementFilterPipe,
     AddTypeComponent,
+    ImportEtatsComponent,
+    ImportFournisseursComponent,
+    ImportContratsComponent,
+    EditEquipementComponent,
+    FicheMouvementComponent,
   ],
   imports: [
     BrowserModule,

@@ -17,17 +17,22 @@
       <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
     </ng-container>
     <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <td mat-cell *matCellDef="let element" (editElement)="element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-          <app-mouvements-expansion style="width:100%;padding: 20px;display: flex;justify-content: space-between;"
-            [Equipements]="element.equipements">
-          </app-mouvements-expansion>
+          <span style="padding: 20px;">
+            <button mat-raised-button color="primary" (click)="onEdit(element.id)"
+              matTooltip="Génerer la fiche du mouvement ">
+              <mat-icon>print</mat-icon>
+            </button>
+          </span>
         </div>
       </td>
     </ng-container>
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"></tr>
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element"></tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
 

@@ -1,7 +1,17 @@
  <form [formGroup]="affectationFormGroup" (ngSubmit)="onSubmit()">
    <mat-vertical-stepper class="mat-elevation-z8" style="padding: 50px;width: 60%;margin: auto;"
      formArrayName="formArray" orientation="vertical" #stepper>
-
+     <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
+       <ng-template matStepLabel>Numéro du Mouvement</ng-template>
+       <mat-form-field appearance="fill">
+         <mat-label>Numéro Mouvement</mat-label>
+         <input type="text" matInput placeholder="N° Du mouvement" formControlName="mvtControl" [value]="lastMvt">
+       </mat-form-field>
+       <div>
+         <button mat-button matStepperPrevious type="button">Retour</button>
+         <button mat-button matStepperNext type="button">Next</button>
+       </div>
+     </mat-step>
      <mat-step formGroupName="0" [stepControl]="formArray?.get([0])">
        <ng-template matStepLabel>Selection d'Equipements</ng-template>
        <mat-form-field appearance="fill">
@@ -14,19 +24,19 @@
            <mat-optgroup [label]="t.nom" *ngFor="let t of types">
              <mat-option (onSelectionChange)="onSelect($event)" [value]="e"
                *ngFor="let e of t.equipement|equipementFilter | search : searchTxt">
-               {{e.codeONE}}
+               {{e.codeONE}}/{{e.serieConstructeur}}
              </mat-option>
            </mat-optgroup>
          </mat-select>
        </mat-form-field>
        <div>
-         <button mat-button matStepperPrevious type="button">Back</button>
-         <button mat-button matStepperNext type="button">Next</button>
+         <button mat-button matStepperPrevious type="button">Retour</button>
+         <button mat-button matStepperNext type="button">Suivant</button>
        </div>
 
      </mat-step>
      <mat-step formGroupName="1" [stepControl]="formArray?.get([1])">
-       <ng-template matStepLabel>Agent Demandeur</ng-template>
+       <ng-template matStepLabel>Selection d'Agent</ng-template>
        <p>Selectionnez un Agent</p>
        <mat-form-field appearance="fill">
          <mat-label>Agent</mat-label>
@@ -41,8 +51,8 @@
          </mat-select>
        </mat-form-field>
        <div>
-         <button mat-button matStepperPrevious type="button">Back</button>
-         <button mat-button matStepperNext type="button">Next</button>
+         <button mat-button matStepperPrevious type="button">Retour</button>
+         <button mat-button matStepperNext type="button">Suivant</button>
        </div>
 
      </mat-step>
@@ -55,33 +65,24 @@
          <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
          <mat-datepicker #datepicker>
            <mat-datepicker-actions>
-             <button mat-button matDatepickerCancel>Cancel</button>
-             <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+             <button mat-button matDatepickerCancel>Annuler</button>
+             <button mat-raised-button color="primary" matDatepickerApply>Appliquer</button>
            </mat-datepicker-actions>
          </mat-datepicker>
        </mat-form-field>
        <div>
-         <button mat-button matStepperPrevious type="button">Back</button>
-         <button mat-button matStepperNext type="button">Next</button>
+         <button mat-button matStepperPrevious type="button">Retour</button>
+         <button mat-button matStepperNext type="button">Reinitialiser</button>
        </div>
 
      </mat-step>
-     <mat-step formGroupName="3" [stepControl]="formArray?.get([3])">
-       <ng-template matStepLabel>Numéro Mouvement</ng-template>
-       <mat-form-field appearance="fill">
-         <mat-label>Numero Mouvement</mat-label>
-         <input type="text" matInput placeholder="N° Du mouvement" formControlName="mvtControl">
-       </mat-form-field>
-       <div>
-         <button mat-button matStepperPrevious type="button">Back</button>
-         <button mat-button matStepperNext type="button">Next</button>
-       </div>
-     </mat-step>
+
      <mat-step>
-       <ng-template matStepLabel>Done</ng-template>
-       <p>You are now done.</p>
+       <ng-template matStepLabel>Confirmation</ng-template>
+       <p>Confirmez vos choix pour effectuez l'opération.</p>
        <div>
-         <button mat-button type="submit" [disabled]="!affectationFormGroup.valid">Submit</button>
+         <button color="primary" mat-raised-button type="submit"
+           [disabled]="!affectationFormGroup.valid">Confirmer</button>
          <button mat-button type="button" (click)="reset();stepper.reset();">Reset</button>
        </div>
      </mat-step>

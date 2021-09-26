@@ -6,4 +6,5 @@ export interface Contrat {
   date1?: Date;
   date2?: Date;
   date3?: Date;
+  fournisseurId?: number;
 }

@@ -1,0 +1,127 @@
+<a mat-raised-button href="javascript:window.print()" class="print-btn" color="primary">
+  Imprimer
+</a>
+
+<div class="print">
+  <header>
+    <img style="margin: 0 auto" alt="" src="../../../assets/Header_Fiche.png">
+    <div style="background: #fafafa;
+  border-radius: 0.25em;
+  color: #000;
+  margin: 0 0 1em;
+  padding: 0.5em 0;">
+      <h1>DMC/MG/GM -Gestion Parc Informatique</h1>
+      <h1 contenteditable>Bon N°{{mouvement.numeroMvt}}</h1>
+      <h1 contenteditable>Le {{mouvement.dateMouvement|date:'dd/MM/yy'}} </h1>
+    </div>
+
+
+  </header>
+  <article>
+    <table class="balance">
+      <col>
+      <colgroup span="1"></colgroup>
+
+      <tr>
+        <th style="text-align: center;font-weight: bold;" colspan="2" scope="colgroup">Agent/Entité</th>
+
+      </tr>
+
+      <tr>
+        <th><span>Nom & Prénom
+          </span></th>
+        <td><span contenteditable>{{mouvement.demandeur.nom}}</span></td>
+      </tr>
+      <tr>
+        <th><span>Matricule
+          </span></th>
+        <td><span contenteditable>{{mouvement.demandeur.matricule}}</span></td>
+      </tr>
+      <tr>
+        <th><span>Pôle/Direction
+          </span></th>
+        <td><span contenteditable>{{mouvement.demandeur.domainePerso}}</span></td>
+      </tr>
+      <tr>
+        <th><span>Division
+          </span></th>
+        <td><span contenteditable></span></td>
+      </tr>
+    </table>
+    <table class="meta">
+
+      <tr>
+        <th><span contenteditable>Fiche #</span></th>
+        <td><span contenteditable>{{mouvement.numeroMvt}}</span></td>
+      </tr>
+      <tr>
+        <th><span contenteditable>Date</span></th>
+        <td><span contenteditable>{{mouvement.dateMouvement|date}}</span></td>
+      </tr>
+      <tr>
+        <th><span contenteditable>Nature du Mouvement</span></th>
+        <td><span contenteditable>{{mouvement.typeMouvement}}</span></td>
+      </tr>
+      <tr>
+        <th><span contenteditable>Motif(s)</span></th>
+        <td><span contenteditable></span></td>
+      </tr>
+    </table>
+    <table class="inventory">
+      <thead>
+        <tr>
+          <th><span contenteditable>Quantité</span></th>
+          <th><span contenteditable>Désignation</span></th>
+          <th><span contenteditable>Numéro(s) de série</span></th>
+          <th><span contenteditable>Remarque</span></th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let e of equipements">
+          <td><span contenteditable>1</span></td>
+          <td><span contenteditable>{{e.gamme.caracteristiques}}</span></td>
+          <td><span contenteditable>{{e.codeONE}}</span> - <span contenteditable>{{e.serieConstructeur}}</span></td>
+          <td><span contenteditable></span></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <table class="meta" style="width: 60%;">
+      <thead>
+        <tr>
+          <th><span contenteditable>Demandeur / Représantant</span></th>
+          <th><span contenteditable>Responsable
+              Hiérarchique</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="height: 100px;">
+          <td><span contenteditable>{{mouvement.demandeur.matricule}}-{{mouvement.demandeur.nom}}</span></td>
+          <td style="height: 100px;"><span contenteditable></span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="balance" style="width: 30%;">
+
+      <tr>
+        <th><span contenteditable>Chef de service
+            DMC/MG/GM
+          </span></th>
+
+      </tr>
+      <tr>
+        <td style="height: 100px;"><span contenteditable></span></td>
+      </tr>
+    </table>
+  </article>
+  <aside>
+    <h1><span contenteditable></span></h1>
+    <div contenteditable>
+      <p>Office National de l'Electricité et l'Eau potable - Branche Electricité. Direction Moyens Communs / Division
+        Moyens Généraux</p>
+    </div>
+  </aside>
+</div>

@@ -11,11 +11,13 @@ import { Agent } from 'src/app/_models/agent';
 import { Direction } from 'src/app/_models/direction';
 
 import { Equipement } from 'src/app/_models/equipement';
+import { Etat } from 'src/app/_models/etat';
 import { Mouvement } from 'src/app/_models/mouvement';
 import { TypeEquipement } from 'src/app/_models/typeEquipement';
 import { AgentService } from 'src/app/_services/agent.service';
 import { DirectionService } from 'src/app/_services/direction.service';
 import { EquipementService } from 'src/app/_services/equipement.service';
+import { EtatService } from 'src/app/_services/etat.service';
 import { MouvementService } from 'src/app/_services/mouvement.service';
 import { TypeEquipementService } from 'src/app/_services/type-equipement.service';
 
@@ -36,7 +38,8 @@ export class AffectationDirComponent implements OnInit {
   selectedEquips: any = [];
   agents: Agent[];
   searchTxt: any;
-
+  lastMvt: any;
+  etats: Etat[];
   constructor(
     private _formBuilder: FormBuilder,
     private typeService: TypeEquipementService,
@@ -46,12 +49,19 @@ export class AffectationDirComponent implements OnInit {
     private mouvementService: MouvementService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private etatService: EtatService
   ) {}
 
   ngOnInit() {
+    this.mouvementService.getLastMouvement().subscribe((res) => {
+      console.log(res);
+      if (res !== null) this.lastMvt = res.numeroMvt + 1;
+      else this.lastMvt = 1;
+      console.log(this.lastMvt);
+    });
     this.onInitData();
-
+    this.etatService.getAllEtats().subscribe((res) => (this.etats = res));
     this.affectationFormGroup = this._formBuilder.group({
       formArray: this._formBuilder.array([
         this._formBuilder.group({
@@ -64,7 +74,10 @@ export class AffectationDirComponent implements OnInit {
           agentControl: ['', Validators.required],
         }),
         this._formBuilder.group({
-          mvtControl: ['', Validators.required],
+          mvtControl: [
+            '',
+            [Validators.required, Validators.pattern('^[0-9]*$')],
+          ],
         }),
       ]),
     });
@@ -99,8 +112,10 @@ export class AffectationDirComponent implements OnInit {
       let direction = this.formArray.get([1]).value.directionControl;
       let agent = this.formArray.get([2]).value.agentControl;
       let liste: string = '';
+      let equipementsId: number[] = [];
       this.selectedEquips.forEach((e) => {
         liste = liste.concat(e.codeONE, '/');
+        equipementsId.push(e.id);
       });
       console.log('HERE');
       let mouvement: Mouvement = {
@@ -109,6 +124,7 @@ export class AffectationDirComponent implements OnInit {
         demandeurId: agent.id,
         dateFinMouvement: null,
         listeEquipements: liste,
+        equipementsId: equipementsId,
       };
       console.log('HERE2');
       let mouvementId: number;
@@ -116,6 +132,7 @@ export class AffectationDirComponent implements OnInit {
         mouvementId = res.id;
         equips.forEach((e, index, array) => {
           console.log(e.inventaireId);
+          e.etatId = this.etats.find((e) => e.abrev === 'AF').id;
           e.mouvementId = mouvementId;
           e.inventaireId = direction.inventaireId;
           console.log(e.inventaireId);
@@ -133,7 +150,9 @@ export class AffectationDirComponent implements OnInit {
               if (index === array.length - 1) {
                 // This is the last one.
                 console.log(e);
-                window.location.reload();
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1500);
                 this.openSnackbar();
               }
             }
