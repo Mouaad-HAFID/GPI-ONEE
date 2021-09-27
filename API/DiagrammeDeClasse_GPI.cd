@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="API.Entities.Agent">
+    <Position X="11.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAKAAIAEAAAAIAgAAAAAAAAACAAEAAAACQAAAAAAIA=</HashCode>
+      <FileName>Entities\Agent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Mouvements" />
+      <Property Name="Equipements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.AppUser">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACCAAAAEAAAAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Entities\AppUser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Entities.Contrat">
+    <Position X="4.25" Y="10.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AEACAAAAAAAAAAABAAAAAAAwAAAACgAAAAAAAAAAAQA=</HashCode>
+      <FileName>Entities\Contrat.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Fournisseur" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equipement" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.Direction">
+    <Position X="11.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAIAAAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Direction.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Mouvement" />
+      <Property Name="Inventaire" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="API.Entities.Equipement">
+    <Position X="7.75" Y="7.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAABAAAA0AAAAACMAAAAQAIQAEAEIAACQAgAAgQE=</HashCode>
+      <FileName>Entities\Equipement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TypeEquipement" />
+      <Property Name="Agent" />
+      <Property Name="Contrat" />
+      <Property Name="Fournisseur" />
+      <Property Name="Etat" />
+      <Property Name="Inventaire" />
+      <Property Name="Gamme" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equipement_Mouvements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.Equipement_Mouvement">
+    <Position X="4.25" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAAAAQAAIAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Equipement_Mouvement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Mouvement" />
+      <Property Name="Equipement" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="API.Entities.Etat">
+    <Position X="7.5" Y="4" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAEAAAAAgAAAAQAAAAAAAA=</HashCode>
+      <FileName>Entities\Etat.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equipements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.Fournisseur">
+    <Position X="7.25" Y="12" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAEAAAAACAAAAAgAAQAAAAAAAA=</HashCode>
+      <FileName>Entities\Fournisseur.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Contrats" />
+      <Property Name="Equipements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.Gamme">
+    <Position X="4.25" Y="8" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAACAAAAAAAAAAAgAAAAAAAAAAAgAQQAAAAAAAA=</HashCode>
+      <FileName>Entities\Gamme.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Type" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equipements" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="API.Entities.Inventaire">
+    <Position X="10.75" Y="8" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAQAAAAAAAE=</HashCode>
+      <FileName>Entities\Inventaire.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Direction" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="API.Entities.Mouvement">
+    <Position X="6.75" Y="0.5" Width="4" />
+    <TypeIdentifier>
+      <HashCode>gAAGAIBAAAAEABAAAAAAAAgAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Mouvement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="API.Entities.TypeEquipement">
+    <Position X="1.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAACAAGAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\TypeEquipement.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Equipement" />
+      <Property Name="Gammes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
